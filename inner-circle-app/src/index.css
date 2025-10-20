@@ -1,0 +1,30 @@
+@font-face {
+  font-family: Lato-Regular;
+  src: url('./assets/fonts/Lato-Regular.ttf');
+  font-family: Nunito-Variable;
+  src: url('./assets/fonts/Nunito-VariableFont_wght.ttf');
+}
+@import "tailwindcss";
+
+@theme {
+  --font-lato: Lato-Regular, 'sans-serif';
+  --font-nunito: Nunito-Variable, 'sans-serif';
+  --animate-menuBarSlideIn: menuBarSlideIn 1s ease-in-out;
+}
+
+@keyframes menuBarSlideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
