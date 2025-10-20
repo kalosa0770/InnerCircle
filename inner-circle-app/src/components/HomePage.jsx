@@ -126,6 +126,7 @@ const WhoWeAreFor = () => {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
+                    slidesToScroll: 1,
                 }
             },
             {
@@ -184,9 +185,9 @@ const WhoWeAreFor = () => {
             <div className="mt-10">
                 <Slider {...settings}>
                     {cardData.map((card, index) => (
-                        <div key={index} className='bg-white h-full rounded-2xl shadow-xl'>
-                                <div className="items-center justify-center flex bg-gray-100 p-2 mb-4">
-                                    {<img src={card.img} alt={card.title} className="md:h-96 md:w-96 h-50 w-50 object-cover rounded-2xl"/>}
+                        <div key={index} className='bg-white h-[450px] rounded-2xl shadow-xl'>
+                                <div className="items-center justify-center flex bg-gray-100 p-2 mb-4 h-56">
+                                    {<img src={card.img} alt={card.title} className="md:h-96 md:w-96 h-44 w-44 object-cover rounded-2xl"/>}
                                 </div>
                                 <div className="flex flex-col py-4 px-4">
                                     <h3 className='text-xl md:text-2xl text-teal-900 font-bold mb-3'>
@@ -208,9 +209,9 @@ const WhoWeAreFor = () => {
 
 function HomePage() {
   return (
-    <div className='w-screen min-h-screen flex flex-col items-center justify-center bg-teal-900 font-lato'>
+    <div className='min-h-screen flex flex-col items-center justify-center bg-teal-900 font-lato'>
       <Header />
-      <main className='flex-grow flex flex-col mt-40 text-white gap-10 w-full'>
+      <main className='flex-grow flex flex-col mt-40 text-white gap-10 w-screen'>
         <CTASection />
         <About />
         <WhoWeAreFor />
