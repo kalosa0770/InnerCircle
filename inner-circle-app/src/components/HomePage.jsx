@@ -88,7 +88,7 @@ const CTASection = () => {
     return (
         <section className='w-full flex flex-col items-center justify-center text-white font-nunito py-4 px-6 md:px-15 lg:px-20'>
             <h2 className='text-2xl mb-4 md:text-4xl text-center font-extrabold'>Inner Circle—Always there. Always for you.</h2>
-            <p className='text-sm md:text-lg mb-6 text-center font-lato'>
+            <p className='text-sm md:text-lg mb-6 text-center font-nunito'>
                 Get personalized 24/7 support, track your mood, 
                 talk your thoughts out, have insightful feedback from health providers and enjoy your mental wellbeing.
             </p>  
@@ -101,7 +101,7 @@ const CTASection = () => {
 
 const About = () => {
     return (
-        <section className='w-full flex flex-col font-lato mt-5 bg-white bg-opacity-10 p-6 rounded-t-4xl items-center justify-center'>
+        <section className='w-full flex flex-col font-nunito mt-5 bg-white bg-opacity-10 p-6 rounded-t-4xl items-center justify-center'>
             
             <p className='md:text-2xl text-xl md:leading-10 text-center max-w-4xl text-orange-400 font-semibold text-center'>
                 InnerCircle is a mental health app built specifically for overcommitted busy scheduled individuals.  
@@ -112,39 +112,7 @@ const About = () => {
     );
 }
 
-const WhoWeAreFor = () => {
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    };
-
-    // Placeholder for your images - use the suggested Tailwind accent colors
+ // Placeholder for your images - use the suggested Tailwind accent colors
     // teal-900 (background), emerald-400 (sage green), orange-400 (coral)
     const cardData = [
         {
@@ -174,20 +142,58 @@ const WhoWeAreFor = () => {
         },
     ];
 
+
+const WhoWeAreFor = () => {
+    var settings = {
+        dots: true,
+        arrows: false,
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+                }
+            }
+            ]
+    };
+
     return (
-        <section className="w-full mx-auto font-lato gap-4 py-10">
+        <section className="w-full mx-auto font-nunito gap-4 py-10">
             {/* Header: Centered and visually strong */}
             <h2 className='text-2xl md:text-4xl font-extrabold text-white text-center mb-10 font-nunito'>
                 Who InnerCircle Is For
             </h2>
             
             {/* Slider Container: Apply padding and ensure text is visible */}
-            <div className="mt-10">
+            <div className="container mt-10 mx-auto px-4 font-nunito">
                 <Slider {...settings}>
                     {cardData.map((card, index) => (
                         <div key={index} className='bg-white h-[450px] rounded-2xl shadow-xl'>
-                                <div className="items-center justify-center flex bg-gray-100 p-2 mb-4 h-56">
-                                    {<img src={card.img} alt={card.title} className="md:h-96 md:w-96 h-44 w-44 object-cover rounded-2xl"/>}
+                                <div className="items-center justify-center flex bg-white p-2 mb-4 h-56">
+                                    {<img src={card.img} alt={card.title} className="w-44 h-44 rounded-2xl"/>}
                                 </div>
                                 <div className="flex flex-col py-4 px-4">
                                     <h3 className='text-xl md:text-2xl text-teal-900 font-bold mb-3'>
@@ -206,15 +212,60 @@ const WhoWeAreFor = () => {
     );
 }
 
+const YourTools = () => {
+    const [selectedTool, setSelectedTool] = useState(true);
+    const [resources, setResources] = useState(false);
+
+
+    const toolClick = (tool) => {
+        if (tool === setSelectedTool(!selectedTool)) {
+            <div className='text-gray-900'>
+                            <h1 className='text-gray-900'>Connect with expert health providers</h1>
+                            <p>Get personalized help and support from expert therapists on a video and audio call consultation</p>
+                        </div>
+        } else if (tool === setResources(!resources)) {
+            return (
+                <div>
+                    <h1>
+                        Resources content here
+                    </h1>
+                </div>
+            )
+        }
+        
+    }
+
+    
+    return (
+         <section className='bg-gray-50 items-center justify-center p-8 w-full rounded-4xl'>
+            <h1 className='md:text-4xl text-2xl text-teal-900 font-bold font-nunito text-center'>Helpful tools to help you thrive</h1>
+            <div className="flex bg-teal-900 gap-4 md:gap-6 flex-wrap justify-center items-center mt-6 p-6 rounded-full mx-auto text-white text-sm md:text-lg font-semibold">
+                <button className='rounded-full bg-teal-700 text-white py-3 px-4' onClick={toolClick}>Teletherapy</button>
+                <button className='rounded-full bg-teal-700 text-white py-3 px-4' onClick={toolClick}>Resource Hub</button>
+                <button className='rounded-full bg-teal-700 text-white py-3 px-4' onClick={toolClick}>Mood Tracking</button>
+                <button className='rounded-full bg-teal-700 text-white py-3 px-4' onClick={toolClick}>Journal Dairy</button>
+                <button className='rounded-full bg-teal-700 text-white py-3 px-4' onClick={toolClick}>Community Support</button>
+            </div>
+            <div>
+                    {selectedTool
+                        
+                        
+                    }
+                </div>
+        </section>
+    );
+}
+
 
 function HomePage() {
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center bg-teal-900 font-lato'>
+    <div className='min-h-screen flex flex-col items-center justify-center bg-teal-900 font-nunito'>
       <Header />
-      <main className='flex-grow flex flex-col mt-40 text-white gap-10 w-screen'>
+      <main className='flex-grow flex flex-col mt-40 text-white gap-10 w-full md:p-10 p-5'>
         <CTASection />
         <About />
         <WhoWeAreFor />
+        <YourTools />
       </main>
     </div>
   );

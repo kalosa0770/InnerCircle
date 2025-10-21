@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className='w-screen flex flex-col'>
+    <div className='w-full flex flex-col'>
       <HomePage />
     </div>
   )
