@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import { Menu, Minus, X, ArrowRight, ChevronDownIcon, CheckIcon, ChevronUpIcon, Download, BookOpenCheck, Zap, InstagramIcon, FacebookIcon, LinkedinIcon } from 'lucide-react';
 import { Listbox } from '@headlessui/react';
 import Slider from "react-slick";
@@ -18,7 +19,7 @@ import Register from './Register';
 
 
 
-const Header = ({signupClick}) => {
+const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
 
@@ -26,69 +27,87 @@ const Header = ({signupClick}) => {
         setIsMenuOpen(!isMenuOpen);
     };
     return (
-        <>
-            {/* // This header is visible on medium screens and up (md:flex) */}
-            <header className='hidden md:flex fixed top-0 z-20 font-nunito w-full py-4 bg-teal-800 text-white text-center text-2xl font-bold drop-shadow-md'>
-                {/* Full-width container with max-width for desktop, centered content, and proper spacing */}
-                <div className="flex justify-between items-center w-full max-w-7xl mx-auto px-4">
-                    <div className="flex items-center">
-                        <h1 className='text-3xl font-extrabold'>InnerCircle</h1>
-                    </div>
-                    <nav className='flex items-center text-lg space-x-4'>
-                        <button className='hover:bg-teal-700 hover:text-white bg-white text-teal-900 rounded-full px-6 py-2 transition duration-300 ease-in-out cursor-pointer shadow-md'>
+       <>
+    {/* // Desktop Header (md:flex) */}
+    <header className='hidden md:flex fixed top-0 z-20 font-nunito w-full py-4 bg-teal-800 text-white text-center text-2xl font-bold drop-shadow-md'>
+        {/* Full-width container with max-w for desktop, centered content, and proper spacing */}
+        <div className="flex justify-between items-center w-full max-w-7xl mx-auto px-4">
+            <div className="flex items-center">
+                <h1 className='text-3xl font-extrabold'>InnerCircle</h1>
+            </div>
+            <nav className='flex items-center text-lg space-x-4'>
+                <button className='hover:bg-teal-700 hover:text-white bg-white text-teal-900 rounded-full px-6 py-2 transition duration-300 ease-in-out cursor-pointer shadow-md'>
+                    Download App
+                </button>
+                <Link  to="/login" >
+                    <button className='border-2 border-white rounded-full px-6 py-2 cursor-pointer hover:bg-white hover:text-teal-900 transition duration-300 ease-in-out'>
+                        Login
+                    </button>
+                </Link>
+                <button className='hover:opacity-80 p-2 cursor-pointer' onClick={toggleMenu}><Menu /></button>
+            </nav>
+        </div>
+    </header>
+
+    {/* // Mobile Header (md:hidden) */}
+    <header className='flex md:hidden fixed top-0 z-20 font-nunito w-full py-4 bg-teal-800 text-white text-2xl font-bold drop-shadow-md'>
+        {/* Full-width container with proper spacing */}
+        <div className="flex justify-between items-center w-full px-4">
+            <div className="flex items-center">
+                <h1 className='text-3xl font-extrabold'>Inner Circle</h1>
+            </div>
+            <nav className='flex items-center text-lg'>
+                <button className='hover:opacity-80 p-2 cursor-pointer' onClick={toggleMenu}><Menu /></button>
+            </nav>
+        </div>
+    </header>
+    
+    {/* Menu Overlay for small screens (Fixed and Styled) */}
+    {isMenuOpen && (
+        <div className='fixed inset-0 bg-black/50 z-30'> 
+            {/* Menu Drawer: Fixed width, full height, rich background, slide effect */}
+            <div className='fixed inset-y-0 right-0 w-80 max-w-full bg-teal-900/95 backdrop-blur-sm h-full z-40 flex flex-col font-nunito p-6 shadow-2xl transition-transform duration-300 transform translate-x-0'>
+                
+                {/* Menu Header (Logo and Close Button) */}
+                <div className="flex justify-between items-center mb-10">
+                    <h2 className='text-xl font-extrabold text-white '>InnerCircle</h2>
+                    <button className='hover:text-teal-300 p-2 text-white ' onClick={toggleMenu}><X /></button> 
+                </div>
+                
+                {/* Navigation and CTAs Container: Uses flex-grow to manage vertical space */}
+                <div className="flex flex-col flex-grow items-start justify-between text-white w-full">
+                    
+                    {/* Primary Navigation Links */}
+                    <nav className='mb-8 w-full space-y-6'>
+                        <div className="flex flex-col gap-4 items-start justify-start">
+                            <button className='text-xl hover:text-amber-300 flex items-center transition-colors'><p>Who we are for</p> <ArrowRight /></button>
+                            <button className='text-xl hover:text-amber-300 flex items-center transition-colors'><p>Features </p><ArrowRight /></button>
+                            <button className='text-xl hover:text-amber-300 flex items-center transition-colors'><p>Resources</p> <ArrowRight /></button>
+                            <button className='text-xl hover:text-amber-300 flex items-center transition-colors'><p>Pricing</p> <ArrowRight /></button>
+                        </div>
+                    </nav>
+                    
+                    {/* CTA Buttons (Pushed to bottom by flex-grow) */}
+                    <nav className='flex flex-col w-full space-y-4 text-2xl'>
+                        <button className='bg-white text-teal-900 rounded-full px-8 py-3 text-lg font-bold hover:bg-teal-100 transition duration-300 ease-in-out cursor-pointer shadow-lg'>
                             Download App
                         </button>
-                        <button className='border-2 border-white rounded-full px-6 py-2 cursor-pointer hover:bg-white hover:text-teal-900 transition duration-300 ease-in-out'>
+                        <button className='border-2 border-white rounded-full px-8 py-3 text-lg cursor-pointer hover:bg-white hover:text-teal-900 transition duration-300 ease-in-out'>
                             Login
                         </button>
-                        {/* Reduced the margin for better spacing */}
-                        <button className='hover:opacity-80 p-2 cursor-pointer' onClick={toggleMenu}><Menu /></button>
-                    </nav>
-                </div>
-            </header>
+                        <p className='text-sm text-center pt-2'>
+                            Do not have an account? <Link to="/register">
+                            <button className='text-amber-300 font-extrabold cursor-pointer hover:underline'>Sign up</button>
+                            </Link>
 
-            {/* // This header is visible on small screens (md:hidden) */}
-            <header className='flex md:hidden fixed top-0 z-20 font-nunito w-full py-4 bg-teal-800 text-white text-2xl font-bold drop-shadow-md'>
-                {/* Full-width container with proper spacing */}
-                <div className="flex justify-between items-center w-full px-4">
-                    <div className="flex items-center">
-                        <h1 className='text-3xl font-extrabold'>Inner Circle</h1>
-                    </div>
-                    <nav className='flex items-center text-lg'>
-                        {/* Removed extra margin for tighter alignment */}
-                        <button className='hover:opacity-80 p-2' onClick={toggleMenu}><Menu /></button>
+                        </p>
                     </nav>
                 </div>
-            </header>
-            {/* Menu Overlay for small screens */}
-            {isMenuOpen && (
-                <div className='fixed absolute inset-y-0 right-0 w-75 md:w-100 bg-teal-800 h-max rounded-s-2xl bg-opacity-75 z-30 flex flex-col font-nunito p-4 menuBarSlideIn'>
-                    <div className="flex justify-between items-center mb-8">
-                        <h2 className='text-xl font-extrabold text-white '>InnerCircle</h2>
-                        <button className='hover:opacity-80 p-2 text-white ' onClick={toggleMenu}><X /></button> 
-                    </div>
-                    <div className="flex flex-col h-full items-start justify-start space-y-10 mt-10 text-white p-4 w-full">
-                        <nav className='mb-8 w-full'>
-                            <div className="flex flex-col gap-4 items-start justify-start">
-                                <button className='text-xl hover:text-amber-500 flex items-center'><p>Who we are for</p> <ArrowRight /></button>
-                                <button className='text-xl hover:text-amber-500 flex items-center'><p>Features </p><ArrowRight /></button>
-                                <button className='text-xl hover:text-amber-500 flex items-center'><p>Resources</p> <ArrowRight /></button>
-                                <button className='text-xl hover:text-amber-500 flex items-center'><p>Pricing</p> <ArrowRight /></button>
-                            </div>
-                        </nav>
-                        <nav className='flex flex-col w-full space-y-6 text-2xl mt-40'>
-                            <button className='bg-white text-teal-900 rounded-full px-8 py-3 text-lg font-bold hover:bg-teal-900 hover:text-white transition duration-300 ease-in-out cursor-pointer shadow-md'>
-                                Download App
-                            </button>
-                            <button className='border-2 border-white rounded-full px-8 py-3 text-lg cursor-pointer hover:bg-white hover:text-teal-900 transition duration-300 ease-in-out'>
-                                Login
-                            </button>
-                            <p className='text-sm text-center'>Do not have an account? <button className='text-amber-500 font-extrabold cursor-pointer' onClick={signupClick}>Sign up</button></p>
-                        </nav>
-                    </div>
-                </div>
-            )}
-        </>
+            </div>
+        </div>
+    )}
+</>
+
         
         
     );
@@ -666,22 +685,13 @@ const Footer = () => {
 
 
 
-function HomePage() {
-    const [mainContent, setMainContent] = useState(true)
-
-    const [clickSignup, setClickSignup] = useState(false);
-
-    const handleClickSignup = () => {
-        setClickSignup(!clickSignup);
-        setMainContent(!mainContent);
-    }
-    
+function HomePage() { 
   return (
     <>
-    {mainContent &&
+   
     
         <div className='min-h-screen flex flex-col items-center justify-center bg-teal-900 font-nunito'>
-            <Header signupClick={handleClickSignup} />
+            <Header />
             <main className='flex-grow flex flex-col mt-20 text-white gap-10 w-full md:p-10 p-5'>
                 <CTASection />
                 <About />
@@ -692,9 +702,6 @@ function HomePage() {
             </main>
             <Footer />
         </div>
-    }
-
-    {clickSignup && <Register />}
     
     </>
   );
