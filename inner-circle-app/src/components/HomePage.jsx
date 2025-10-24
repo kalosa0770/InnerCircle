@@ -258,22 +258,20 @@ const WhoWeAreFor = () => {
 const TherapistContent = () => (
     // Outer Flex Container: Stacks vertically on mobile, splits into two columns on medium screens and up
     <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto space-y-6 md:space-y-0 md:space-x-8 p-4">
-        
-        {/* Text / Content Box (Takes full width on mobile, half on desktop) */}
-        <div className='w-full md:w-1/2 p-8 bg-white shadow-2xl rounded-2xl order-2 md:order-1 transition-all duration-500'>
-            <h2 className='text-3xl font-extrabold text-teal-800 mb-3'>Teletherapy</h2>
-            <p className='text-xl text-gray-700 leading-relaxed'>
+        <div className='w-full md:w-1/2 w-2/4 order-2 md:order-1 text-start order-1 md:order-1'>
+            <h2 className='text-2xl font-extrabold text-teal-800 mb-3'>Teletherapy</h2>
+            <p className='text-lg text-gray-700 leading-relaxed'>
                 Connect with licensed therapists online for personalized, secure care right from the comfort of your home. Schedule sessions that fit your busy life.
             </p>
         </div>
         
         {/* Image / Visual Box (Takes full width on mobile, half on desktop) */}
-        <div className="w-full md:w-1/2 flex justify-center items-center order-1 md:order-2">
+        <div className="w-full flex justify-center items-center order-2 md:order-2">
             <img 
                 src={therapist} 
                 alt="Illustration of a therapist session" 
                 // Styles to make image clean and responsive
-                className="w-full h-auto max-h-96 rounded-xl shadow-xl object-cover" 
+                className="w-full h-full max-h-96 rounded-xl shadow-xl object-cover" 
             />
         </div>
     </div>
@@ -286,19 +284,19 @@ const ResourceContent = () => (
     <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto space-y-6 md:space-y-0 md:space-x-8 p-4">
         
         {/* Text Box */}
-        <div className='w-full md:w-1/2 p-8 bg-white shadow-2xl rounded-2xl order-2 md:order-1 transition-all duration-500'>
-            <h2 className='text-3xl font-extrabold text-teal-800 mb-3'>Resource Hub</h2>
-            <p className='text-xl text-gray-700 leading-relaxed'>
+        <div className='w-full md:w-1/2 w-2/4 order-2 md:order-1 text-start order-1 md:order-1'>
+            <h2 className='text-2xl font-extrabold text-teal-800 mb-3'>Resource Hub</h2>
+            <p className='text-lg text-gray-700 leading-relaxed'>
                 Access curated articles, guided meditations, and expert advice for proactive, self-guided well-being. Your library of calm, available instantly.
             </p>
         </div>
         
         {/* Image Box */}
-        <div className="w-full md:w-1/2 flex justify-center items-center order-1 md:order-2">
+        <div className="w-full flex justify-center items-center order-2 md:order-2">
             <img 
                 src={resources} 
                 alt="Illustration of resources and self-help tools" 
-                className="w-full h-auto max-h-96 rounded-xl shadow-xl object-cover" 
+                className="w-full h-full max-h-96 rounded-xl shadow-xl object-cover" 
             />
         </div>
     </div>
@@ -309,22 +307,19 @@ const ResourceContent = () => (
 // ---------------------------------------------------------
 const MoodContent = () => (
     <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto space-y-6 md:space-y-0 md:space-x-8 p-4">
-        
-        {/* Image Box (Order 1 on mobile and desktop) */}
-        <div className="w-full md:w-1/2 flex justify-center items-center order-1">
+        <div className='w-full md:w-1/2 w-2/4 order-2 md:order-1 text-start order-1 md:order-1'>
+            <h2 className='text-2xl font-extrabold text-teal-800 mb-3'>Mood Tracking & Journaling</h2>
+            <p className='text-lg text-gray-700 leading-relaxed'>
+                Log your daily moods and activities to identify patterns and triggers for better mental health management and self-awareness.
+            </p>
+        </div>
+
+        <div className="w-full flex justify-center items-center order-2 md:order-2">
             <img 
                 src={mood} 
                 alt="Illustration of mood tracking on a phone" 
-                className="w-full h-auto max-h-96 rounded-xl shadow-xl object-cover" 
+                className="w-full h-full max-h-96 rounded-xl shadow-xl object-cover" 
             />
-        </div>
-        
-        {/* Text Box (Order 2 on mobile and desktop) */}
-        <div className='w-full md:w-1/2 p-8 bg-white shadow-2xl rounded-2xl order-2 transition-all duration-500'>
-            <h2 className='text-3xl font-extrabold text-teal-800 mb-3'>Mood Tracking & Journaling</h2>
-            <p className='text-xl text-gray-700 leading-relaxed'>
-                Log your daily moods and activities to identify patterns and triggers for better mental health management and self-awareness.
-            </p>
         </div>
     </div>
 );
@@ -334,22 +329,19 @@ const MoodContent = () => (
 // ---------------------------------------------------------
 const CommunityContent = () => (
     <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto space-y-6 md:space-y-0 md:space-x-8 p-4">
-        
-        {/* Image Box */}
-        <div className="w-full md:w-1/2 flex justify-center items-center order-1">
+        <div className='w-full md:w-1/2 w-2/4 order-2 md:order-1 text-start order-1 md:order-1'>
+            <h2 className='text-2xl font-extrabold text-teal-800 mb-3'>Community Support</h2>
+            <p className='text-2l text-gray-700 leading-relaxed'>
+                Join moderated forums and support groups to share experiences and gain insights from others on similar wellness journeys.
+            </p>
+        </div>
+
+        <div className="w-full flex justify-center items-center order-2 md:order-2">
             <img 
                 src={community} 
                 alt="Illustration of a community forum group" 
                 className="w-full h-auto max-h-96 rounded-xl shadow-xl object-cover" 
             />
-        </div>
-        
-        {/* Text Box */}
-        <div className='w-full md:w-1/2 p-8 bg-white shadow-2xl rounded-2xl order-2 transition-all duration-500'>
-            <h2 className='text-3xl font-extrabold text-teal-800 mb-3'>Community Support</h2>
-            <p className='text-xl text-gray-700 leading-relaxed'>
-                Join moderated forums and support groups to share experiences and gain insights from others on similar wellness journeys.
-            </p>
         </div>
     </div>
 );
@@ -676,7 +668,7 @@ function HomePage() {
   return (
     <div className='min-h-screen flex flex-col items-center justify-center bg-teal-900 font-nunito'>
       <Header />
-      <main className='flex-grow flex flex-col mt-40 text-white gap-10 w-full md:p-10 p-5'>
+      <main className='flex-grow flex flex-col mt-20 text-white gap-10 w-full md:p-10 p-5'>
         <CTASection />
         <About />
         <WhoWeAreFor />
