@@ -14,8 +14,11 @@ import mood from '../assets/mood-tracking.jpg';
 import community from '../assets/community-forum.jpg';
 
 
+import Register from './Register';
 
-const Header = () => {
+
+
+const Header = ({signupClick}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
 
@@ -80,7 +83,7 @@ const Header = () => {
                             <button className='border-2 border-white rounded-full px-8 py-3 text-lg cursor-pointer hover:bg-white hover:text-teal-900 transition duration-300 ease-in-out'>
                                 Login
                             </button>
-                            <p className='text-sm text-center'>Do not have an account? <button className='text-amber-500 font-extrabold cursor-pointer'>Sign up</button></p>
+                            <p className='text-sm text-center'>Do not have an account? <button className='text-amber-500 font-extrabold cursor-pointer' onClick={signupClick}>Sign up</button></p>
                         </nav>
                     </div>
                 </div>
@@ -664,20 +667,36 @@ const Footer = () => {
 
 
 function HomePage() {
+    const [mainContent, setMainContent] = useState(true)
+
+    const [clickSignup, setClickSignup] = useState(false);
+
+    const handleClickSignup = () => {
+        setClickSignup(!clickSignup);
+        setMainContent(!mainContent);
+    }
     
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center bg-teal-900 font-nunito'>
-      <Header />
-      <main className='flex-grow flex flex-col mt-20 text-white gap-10 w-full md:p-10 p-5'>
-        <CTASection />
-        <About />
-        <WhoWeAreFor />
-        <YourTools />
-        <GetStartedSteps />
-        
-      </main>
-      <Footer />
-    </div>
+    <>
+    {mainContent &&
+    
+        <div className='min-h-screen flex flex-col items-center justify-center bg-teal-900 font-nunito'>
+            <Header signupClick={handleClickSignup} />
+            <main className='flex-grow flex flex-col mt-20 text-white gap-10 w-full md:p-10 p-5'>
+                <CTASection />
+                <About />
+                <WhoWeAreFor />
+                <YourTools />
+                <GetStartedSteps />
+                
+            </main>
+            <Footer />
+        </div>
+    }
+
+    {clickSignup && <Register />}
+    
+    </>
   );
 }
 
