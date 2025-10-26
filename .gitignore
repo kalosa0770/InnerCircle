@@ -1,0 +1,122 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Environment
+.env
+.env.*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Mac system files
+.DS_Store
+
+# Temporary
+tmp/
+temp/
+.cache/
+
+# Package locks (optional — keep if you want to commit locks)
+# package-lock.json
+# yarn.lock
+
+# Misc
+*.sqlite
+*.sqlite3
+*.db
+
+# Vite/React
+/dist
+/.cache
+
+# Next.js
+.next/
+.out/
+
+# Parcel
+.cache/
+.parcel-cache/
+
+# dotenv
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# npm
+npm-debug.log
+
+# coverage
+coverage/
+
+# JetBrains
+.idea/
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/
+.history/
+
+# Local VS Code settings
+.settings/
+
+# Storybook
+.out/
+.storybook/
+
+# Logs
+logs/
+
+# Misc editors
+*~
+*.swp
+
+# Ignore compiled typescript
+dist/
+
+# Ignore build artifacts for both projects
+inner-circle-app/dist/
+inner-circle-app/node_modules/
+inner-circle-server/node_modules/
+inner-circle-server/dist/
+
+# Ignore OS-specific OneDrive files
+*.lnk
+
+# Secrets
+secrets.json
+
+# End
