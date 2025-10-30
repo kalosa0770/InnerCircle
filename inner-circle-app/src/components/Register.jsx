@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom';
 import { ChevronLeftIcon, CheckIcon } from 'lucide-react';
+
 
 // --- Form Step Wrapper Component ---
 // This handles the card styling, header, and progress bar display
@@ -366,9 +368,11 @@ const Register = () => {
                         <p className="text-xl text-gray-700">
                             Welcome, {formData.firstName || 'New User'}! You are now ready to start your 30-day free trial.
                         </p>
-                        <button className="bg-teal-700 text-white rounded-full py-3 px-8 text-lg font-bold shadow-md transition duration-300 hover:bg-teal-800 mt-8">
-                            Go to Login 
-                        </button>
+                        <Link to='/login'>
+                            <button className="bg-teal-700 text-white rounded-full py-3 px-8 text-lg font-bold shadow-md transition duration-300 hover:bg-teal-800 mt-8">
+                                Go to Login 
+                            </button>
+                        </Link>
                     </div>
                 );
             default:

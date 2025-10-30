@@ -19,7 +19,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         setError('');
 
@@ -28,9 +28,11 @@ const Login = () => {
             return;
         }
 
+        
+
         // Simulate successful login, then navigate to the Home page
         handleLogin(email, password);
-         navigate('/'); // Uncomment this line on successful login
+         navigate('/dashboard'); // Uncomment this line on successful login
     };
 
     return (
