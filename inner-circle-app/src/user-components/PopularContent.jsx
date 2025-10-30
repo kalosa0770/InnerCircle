@@ -6,26 +6,26 @@ import placeHolder from '../assets/hub.jpg'
 
 const cardData = [
     {
-        title: "Busy Professionals",
-        text: "For those juggling demanding careers and personal lives, InnerCircle offers quick access to mental health support.",
+        title: "Mindfulness",
+        text: "The mind is the greatest assest of a human-being. Get started to know how to.",
         img: placeHolder, 
         accentColor: 'text-orange-400'
     },
     {
-        title: "Students",
-        text: "Helping students manage academic stress and personal challenges with on-the-go therapy options.",
+        title: "Stress",
+        text: "Unlock your inner control, take hold of your stressors today through our curated resources.",
         img: placeHolder,
         accentColor: 'text-emerald-400'
     },
     {
-        title: "Parents",
-        text: "Supporting parents in balancing family responsibilities while prioritizing their mental well-being.",
+        title: "Depression",
+        text: "Dont be a target for mental distress. Know how to handle depression in these five steps",
         img: placeHolder,
         accentColor: 'text-orange-400'
     },
     {
-        title: "Health Providers",
-        text: "Offering healthcare professionals tools to monitor and support their patients' mental health effectively.",
+        title: "All in one",
+        text: "Offering healthcare through our curated resources to take hold of your daily stressors.",
         img: placeHolder,
         accentColor: 'text-emerald-400'
     },
