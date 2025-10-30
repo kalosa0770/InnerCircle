@@ -19,13 +19,12 @@ const Header = () => {
         <header className="flex flex-col text-white font-nunito w-full max-w-full">
             {/* Top Bar with Icons */}
             <div className="flex justify-between items-center mb-6 w-full">
-                {/* App Title - Hidden on mobile, shown on larger screens */}
-                <h1 className="hidden md:block italic text-lato text-2xl font-bold text-white drop-shadow-lg">
-                    Inner Circle
-                </h1>
-                
-                {/* Icons Container */}
-                <div className="flex items-center gap-3 ml-auto">
+                    {/* User Profile */}
+                    <button className="flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full p-2 
+                                    text-white hover:bg-white/30 transition-all duration-200 
+                                    hover:scale-110 shadow-lg hover:shadow-white/25">
+                        <UserCircle className="w-5 h-5 md:w-6 md:h-6" />
+                    </button>
                     {/* Notification Bell */}
                     <button className="relative flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full p-2 
                                     text-white hover:bg-white/30 transition-all duration-200 
@@ -34,18 +33,11 @@ const Header = () => {
                         {/* Notification Indicator */}
                         <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-teal-900"></span>
                     </button>
-                    
-                    {/* User Profile */}
-                    <button className="flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full p-2 
-                                    text-white hover:bg-white/30 transition-all duration-200 
-                                    hover:scale-110 shadow-lg hover:shadow-white/25">
-                        <UserCircle className="w-5 h-5 md:w-6 md:h-6" />
-                    </button>
-                </div>
+                
             </div>
 
             {/* App Title - Mobile Only */}
-            <h1 className="md:hidden italic text-lato text-2xl font-bold text-white text-center mb-6 drop-shadow-lg">
+            <h1 className="md:hidden font-dancing-script text-4xl font-extrabold text-white text-center mb-6 drop-shadow-lg">
                 Inner Circle
             </h1>
 
@@ -61,34 +53,32 @@ const Header = () => {
                             User
                         </span>
                     </h1>
-                    <p className="text-teal-100 text-sm md:text-base mt-1">
+                    <p className="text-teal-100 text-lg md:text-base mt-1">
                         Ready to focus on your mental wellness today?
                     </p>
                 </div>
 
                 {/* Tip of the Day */}
-                <div className="flex flex-col bg-gradient-to-r from-teal-500/20 to-emerald-500/20 
-                             rounded-xl p-4 border border-white/10 backdrop-blur-sm w-full">
+                <div className="flex flex-col p-4 w-full">
                     <div className="flex items-center gap-2 mb-2 w-full">
                         <div className="flex items-center gap-2 text-amber-300">
                             <Zap className="w-4 h-4 md:w-5 md:h-5 fill-amber-300" />
-                            <h2 className="font-semibold text-sm md:text-base italic text-white">
+                            <h2 className="font-semibold text-lg md:text-base italic text-white">
                                 Tip of the day
                             </h2>
                         </div>
                     </div>
                     <div className="flex items-start w-full">
-                        <div className="text-teal-800 text-4xl mr-2 -mt-1 opacity-60 flex-shrink-0">"</div>
+                        
                         <p className="text-white/90 text-sm md:text-base leading-relaxed font-light flex-1">
                             Your greatest weapon is your mindset. Take care of it with daily mindfulness practices.
                         </p>
-                        <div className="text-teal-800 text-4xl ml-2 -mt-1 opacity-60 flex-shrink-0">"</div>
                     </div>
                 </div>
             </div>
 
             {/* Quick Stats Bar - Optional Addition */}
-            <div className="flex justify-between items-center mt-4 text-xs text-white/70 w-full">
+            <div className="flex justify-between items-center mt-4 text-sm text-white/70 w-full">
                 <div className="flex items-center gap-1">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span>Mindful minutes today: 15</span>

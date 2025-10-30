@@ -1,14 +1,21 @@
 @font-face {
   font-family: Lato-Regular;
-  src: url('./assets/fonts/Lato-Regular.ttf');
+  src: url('./assets/fonts/Lato-Regular.ttf'); 
+}
+@font-face {
   font-family: Nunito-Variable;
   src: url('./assets/fonts/Nunito-VariableFont_wght.ttf');
+}
+@font-face {
+  font-family: DancingScript-Bold;
+  src: url('./assets/fonts/DancingScript-VariableFont_wght.ttf');
 }
 @import "tailwindcss";
 
 @theme {
   --font-lato: Lato-Regular, 'sans-serif';
   --font-nunito: Nunito-Variable, 'sans-serif';
+  --font-dancing-script: DancingScript-Bold, 'sans-serif';
   --animate-menuBarSlideIn: menuBarSlideIn 1s ease-in-out;
 }
 

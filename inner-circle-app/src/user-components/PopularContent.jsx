@@ -35,71 +35,66 @@ const PopularContent = () => {
     const settings = {
         className: "center",
         centerMode: true,
-        centerPadding: "0px",
+        centerPadding: "60px",
         dots: true,
         arrows: false,
         infinite: true,
         slidesToShow: 2.2,
+        initialSlide: 0,
         speed: 500,
         autoplay: false,
         responsive: [
             {
-                breakpoint: 1280,
-                settings: {
-                    centerPadding: "40px",
-                    slidesToShow: 1.8,
-                }
-            },
-            {
                 breakpoint: 1024,
                 settings: {
-                    centerPadding: "60px",
-                    slidesToShow: 1.5,
+                    centerMode: true,
+                    centerPadding: "40px",
+                    slidesToShow: 2.2,
+                    initialSlide: 0
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
-                    centerPadding: "40px",
+                    centerMode: true,
+                    centerPadding: "30px",
                     slidesToShow: 1.2,
+                    initialSlide: 0
                 }
             },
             {
                 breakpoint: 640,
                 settings: {
-                    centerMode: false,
-                    slidesToShow: 1,
-                    centerPadding: "0px",
+                    centerMode: false, // Disable center mode on very small screens
+                    slidesToShow: 1.2,
+                    slidesToScroll: 1,
+                    initialSlide: 0,
+                    centerPadding: "0px"
                 }
             }
         ]
+
     };
 
     return (
         <div className="flex flex-col w-full">
             {/* Header with better contrast */}
-            <div className="text-center mb-8 md:mb-12">
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-3 md:mb-4 drop-shadow-lg">
+            <div className="mb-8 md:mb-12">
+                <h1 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 drop-shadow-lg">
                     Popular on Inner Circle
                 </h1>
-                <p className="text-teal-100 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md">
-                    Discover tailored mental health support for different lifestyles and needs
-                </p>
             </div>
 
             {/* Slider Container */}
-            <div className="w-full max-w-7xl mx-auto px-2">
+            <div className=" w-full max-w-7xl mx-auto px-2">
                 <Slider {...settings}>
                     {cardData.map((card, index) => (
                         <div key={index} className="px-2 md:px-3 py-4 md:py-6 focus:outline-none">
                             {/* Individual Card with glass morphism effect */}
-                            <div className="bg-white/95 backdrop-blur-md min-h-[420px] md:min-h-[480px] rounded-2xl overflow-hidden shadow-2xl 
-                                        border-t-4 border-teal-500 transition-all duration-300 
-                                        transform hover:scale-[1.02] hover:shadow-teal-400/30
-                                        group cursor-pointer hover:bg-white">
+                            <div className="min-h-[220px] md:min-h-[440px] rounded-2xl overflow-hidden shadow-2xl">
                                 
                                 {/* Image Area */}
-                                <div className="w-full h-40 md:h-48 overflow-hidden bg-teal-100/50">
+                                <div className="w-full h-40 md:h-48 overflow-hidden">
                                     <img 
                                         src={card.img} 
                                         alt={card.title} 
@@ -111,12 +106,12 @@ const PopularContent = () => {
                                 <div className="flex flex-col py-5 md:py-6 px-5 md:px-6">
                                     <div className="flex items-center mb-3">
                                         <div className={`w-3 h-3 rounded-full ${card.accentColor.replace('text', 'bg')} mr-3`}></div>
-                                        <h3 className="text-xl md:text-2xl text-teal-800 font-bold">
+                                        <h3 className="text-xl md:text-2xl text-white font-bold">
                                             {card.title}
                                         </h3>
                                     </div>
                                     
-                                    <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4 md:mb-6">
+                                    <p className="text-white text-sm md:text-base leading-relaxed mb-4 md:mb-6">
                                         {card.text}
                                     </p>
                                     
