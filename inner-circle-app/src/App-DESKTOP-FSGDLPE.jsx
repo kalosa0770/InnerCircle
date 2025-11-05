@@ -3,9 +3,8 @@ import HomePage from './components/HomePage.jsx';
 import Register from './components/Register.jsx';
 import LoginForm from './components/LoginForm.jsx';
 import ForgotPassword from './components/ForgotPassword.jsx';
+import EmailVerify from './components/EmailVerify.jsx';
 import UserDashboard from './user-components/UserDashboard.jsx';
-import MoodQuestions from './user-components/MoodQuestions.jsx';
-import MoodEntry from './user-components/MoodEntry.jsx';
 
 
 function App() {
@@ -19,9 +18,8 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/verify" element={<EmailVerify />} />
         <Route path='/dashboard' element={<UserDashboard />} />
-        <Route path="/mood-entry" element={<MoodEntry />} />
-        <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
       </Routes>
       
     </div>
