@@ -536,15 +536,15 @@ const steps = [
 
 const StepCard = ({ step }) => {
     // Determine gradient colors for a visual path effect
-    const gradientFrom = step.number === 1 ? 'from-teal-600' : 
-                         step.number === 2 ? 'from-teal-700' : 
-                         step.number === 3 ? 'from-teal-900' : 
-                                            'from-teal-800';
+    // const gradientFrom = step.number === 1 ? 'from-teal-600' : 
+    //                      step.number === 2 ? 'from-teal-700' : 
+    //                      step.number === 3 ? 'from-teal-900' : 
+    //                                         'from-teal-800';
     
-    const gradientTo = step.number === 3 ? 'to-teal-900' : 'to-teal-700';
+    // const gradientTo = step.number === 3 ? 'to-teal-900' : 'to-teal-700';
 
     return (
-        <div className={`relative flex flex-col p-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-[1.03] text-white bg-gradient-to-br ${gradientFrom} ${gradientTo} h-full`}>
+        <div className={`relative flex flex-col p-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-[1.03] text-teal-900 bg-white h-full`}>
             
             {/* Step Number Badge */}
             <div className="absolute -top-3 -right-3 size-10 flex items-center justify-center bg-white rounded-full text-teal-800 font-extrabold text-xl shadow-md ring-2 ring-teal-500">
@@ -556,7 +556,7 @@ const StepCard = ({ step }) => {
                     <div className="text-3xl mr-4">{step.icon}</div>
                     <h3 className="text-xl font-bold">{step.title}</h3>
                 </div>
-                <p className="text-teal-100">{step.description}</p>
+                <p className="text-teal-900">{step.description}</p>
             </div>
             
             
@@ -570,13 +570,13 @@ const StepCard = ({ step }) => {
 
 const GetStartedSteps = () => {
     return (
-        <section className="py-16 md:py-24 bg-white/95 backdrop-blur-sm items-center justify-center mx-auto rounded-3xl shadow-2xl w-full font-nunito px-4">
+        <section className="py-16 md:py-24   items-center justify-center mx-auto  w-full font-nunito px-4">
             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                 
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16">
-                    <span className="text-sm font-semibold text-teal-600 uppercase tracking-widest">Your Wellness Journey</span>
-                    <h2 className="mt-2 text-4xl md:text-5xl font-extrabold text-teal-900">
+                    <span className="text-sm font-semibold text-white uppercase tracking-widest">Your Wellness Journey</span>
+                    <h2 className="mt-2 text-4xl md:text-5xl font-extrabold text-white">
                         Three Simple Steps to Get Started
                     </h2>
                 </div>

@@ -1,13 +1,16 @@
 import React from 'react';
-import { Home, Zap, BarChart, Video, Book } from 'lucide-react';
+import { Home, Zap, Lightbulb, Video, Book, UserCircle } from 'lucide-react';
+import { Link, NavLink } from 'react-router-dom';
 
 const FooterNav = () => {
+
   const navItems = [
-    { name: 'Home', icon: Home},
-    { name: 'Track Mood', icon: BarChart},
-    { name: 'Explore', icon: Book},
-    { name: 'Therapy', icon: Video},
-    { name: 'Circle', icon: Zap },
+    { name: 'Dashboard', icon: Home, link: 'dashboard'},
+    { name: 'Track Mood', icon: Lightbulb, link: 'track'},
+    { name: 'Explore', icon: Book, link: 'explore'},
+    // { name: 'Therapy', icon: Video},
+    // { name: 'Circle', icon: Zap },
+    { name: 'Profile', icon: UserCircle, link: 'profile' }
   ];
 
   return (
@@ -16,13 +19,21 @@ const FooterNav = () => {
         {navItems.map((item) => {
 
           return (
-            <button
-              key={item.name}
-              className="flex flex-col items-center p-2 rounded-lg transition duration-300 hover:bg-gray-100 active:bg-gray-200"
-            >
-              <item.icon size={24}  />
-              <span className={`text-xs mt-1 `}>{item.name}</span>
-            </button>
+            <NavLink
+                key={item.name}
+                to={`/${item.link.toLowerCase()}`}
+                className={({ isActive }) =>
+                  `flex flex-col items-center p-2 rounded-lg transition duration-300 hover:bg-gray-100 active:bg-gray-200 ${
+                    isActive
+                      ? "text-amber-400 font-extrabold"
+                      : "text-teal-900"
+                  }`
+                }
+              >
+                <item.icon size={24}  />
+                <span className={`text-xs mt-1 `}>{item.name}</span>
+            </NavLink>
+            
           );
         })}
       </div>

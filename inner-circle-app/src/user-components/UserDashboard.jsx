@@ -8,6 +8,7 @@ import MoodRecommendations from './MoodRecommendations';
 import MoodChart from './MoodChart';
 import ProgressBar from './ProgressBar';
 import SearchByTopicCards from './SearchByTopicCards';
+import { Outlet } from 'react-router-dom';
 import FooterNav from './FooterNav';
 
 const UserDashboard = () => {
@@ -46,7 +47,7 @@ const UserDashboard = () => {
           <MoodChart />
           <SearchByTopicCards />
           
-
+          <Outlet />
           <div className="mb-10"></div>
         </main>
 

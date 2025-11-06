@@ -14,7 +14,6 @@ const topics = [
   "Productivity",
   "Emotional Health",
   "Meditation",
-  "Resilience",
   "Happiness"
 ];
 
@@ -29,7 +28,7 @@ const SearchByTopicCards = ({ onSelectTopic }) => {
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
       <h2 className="text-white text-xl font-bold mb-4">Select a Topic</h2>
-      <div className="flex overflow-x-auto no-scrollbar space-x-4 md:space-x-6 px-4 md:px-6 w-full">
+      <div className="flex gap-4 overflow-x-auto">
         {topics.map((topic) => (
           <button
             key={topic}

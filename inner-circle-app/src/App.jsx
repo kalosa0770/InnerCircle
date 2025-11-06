@@ -6,6 +6,8 @@ import ForgotPassword from './components/ForgotPassword.jsx';
 import UserDashboard from './user-components/UserDashboard.jsx';
 import MoodQuestions from './user-components/MoodQuestions.jsx';
 import MoodEntry from './user-components/MoodEntry.jsx';
+import ResourcePage from './user-components/ResourcePage.jsx';
+import TrackMoodPage from './user-components/TrackMoodPage.jsx';
 
 
 function App() {
@@ -22,6 +24,9 @@ function App() {
         <Route path='/dashboard' element={<UserDashboard />} />
         <Route path="/mood-entry" element={<MoodEntry />} />
         <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
+        <Route path="/explore" element={<ResourcePage />} />
+        <Route path="/track" element={<TrackMoodPage />} />
+
       </Routes>
       
     </div>
