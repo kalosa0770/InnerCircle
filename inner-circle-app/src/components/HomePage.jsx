@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ArrowRight, Download, BookOpenCheck, CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
+import { Menu, X, ArrowRight, Download, BookOpenCheck, CheckIcon, ChevronDownIcon, ChevronUpIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Listbox } from '@headlessui/react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import providers from '../assets/providers.jpg';
-import students from '../assets/students.jpg';
-import busyProfessionals from '../assets/busy-professionals.jpg';
-import parents from '../assets/parents.jpg';
+// import providers from '../assets/providers.jpg';
+// import students from '../assets/students.jpg';
+// import busyProfessionals from '../assets/busy-professionals.jpg';
+// import parents from '../assets/parents.jpg';
 import therapist from '../assets/therapist.jpg';
 import resources from '../assets/hub.jpg';
 import mood from '../assets/mood-tracking.jpg';
 import community from '../assets/community-forum.jpg';
 
 import heroBackground from '../assets/heroBackground.jpg';
+import icon from '../../public/logo.png';
 
 // ---------- HEADER ----------
 const Header = () => {
@@ -128,44 +129,46 @@ const CTASection = () => {
 
 // ---------- ABOUT ----------
 const About = () => (
-  <section className='w-full flex flex-col font-nunito mt-5 bg-gray-50 p-8 md:p-12 lg:p-16 rounded-3xl items-center justify-center shadow-inner'>
-    <p className='text-xl md:text-3xl text-center max-w-5xl text-teal font-extrabold md:leading-relaxed'>
-      Lucid Path is built for busy individuals seeking mental wellness. Access licensed therapists, mood tracking, and self-help resources instantly.
-    </p>
+  <section className='flex flex-col md:flex-row items-center p-6 md:p-16 bg-white rounded-xl shadow-lg mt-16 max-w-7xl mx-auto'>
+    {/* Image on the left */}
+    <div className='w-full md:w-1/2 h-96 md:h-[500px] flex-shrink-0 overflow-hidden rounded-xl shadow-xl mb-6 md:mb-0'>
+      <img src={icon} alt="Lucid Path" className='w-full h-full object-cover' />
+    </div>
+
+    {/* Text on the right */}
+    <div className='w-full md:w-1/2 md:pl-12 text-teal md:p-12'>
+      <h2 className='text-3xl md:text-5xl font-extrabold mb-6'>Lucid Path</h2>
+      <p className='text-lg md:text-xl leading-relaxed font-semibold'>
+        Lucid Path is built for busy individuals seeking mental wellness. Access licensed therapists, mood tracking, and self-help resources instantly. Take control of your mental health journey today with guidance and support tailored for you.
+      </p>
+    </div>
   </section>
 );
 
 // ---------- CARD DATA ----------
-const cardData = [
-  { title: "Busy Professionals", text: "Quick access to mental health support for demanding careers.", img: busyProfessionals },
-  { title: "Students", text: "Manage academic stress and personal challenges easily.", img: students },
-  { title: "Parents", text: "Balance family responsibilities while prioritizing well-being.", img: parents },
-  { title: "Health Providers", text: "Tools for healthcare professionals to support patients effectively.", img: providers },
-];
+
 
 // ---------- WHO WE ARE FOR (SLIDER) ----------
 const WhoWeAreFor = () => {
-  
-
   return (
     <section className="w-full mx-auto font-nunito py-16 px-4 bg-teal">
-      <h2 className='text-3xl md:text-5xl font-extrabold text-gold text-center mb-16'>
+      <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-12 text-gold">
         Who Lucid Path Is For
       </h2>
 
-      <div className="flex space-x-6 overflow-x-auto pb-4 gap-4 scrollbar-thin scrollbar-thumb-gold scrollbar-track-teal/50">
-        {cardData.map((card, i) => (
+      <div className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar pb-4 w-full justify-center ">
+        {[
+          { title: "Students", description: "For learners managing study stress." },
+          { title: "Professionals", description: "For busy minds balancing work and life." },
+          { title: "Therapists", description: "For experts connecting with users." },
+          { title: "Communities", description: "For those creating safe spaces to share." },
+        ].map((card, i) => (
           <div
             key={i}
-            className='flex-shrink-0 w-80 bg-white min-h-[480px] rounded-2xl overflow-hidden shadow-2xl border-t-4 border-gold transform hover:scale-[1.03] hover:shadow-gold/50 transition'
+            className="flex-none w-100 md:w-80 lg:w-80 bg-white text-teal-800 rounded-2xl shadow-lg py-6 px-6"
           >
-            <div className="w-full h-64 overflow-hidden flex items-center justify-center bg-gray/50">
-              <img src={card.img} alt={card.title} className="w-full h-full object-cover"/>
-            </div>
-            <div className="flex flex-col py-6 px-6">
-              <h3 className='text-2xl text-teal font-extrabold mb-2'>{card.title}</h3>
-              <p className='text-gray-700'>{card.text}</p>
-            </div>
+            <h3 className="text-xl font-bold mb-3">{card.title}</h3>
+            <p className="text-gray-600">{card.description}</p>
           </div>
         ))}
       </div>
