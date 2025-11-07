@@ -15,7 +15,7 @@ function App() {
   
 
   return (
-    <div className='w-full flex flex-col'>
+    <div className='flex flex-col'>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginForm />} />
