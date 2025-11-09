@@ -16,7 +16,7 @@ const UserDashboard = () => {
   const [selectedMood, setSelectedMood] = useState(null);
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-teal-900 via-teal-700 to-teal-600 font-nunito">
+    <div className="flex min-h-screen bg-white font-nunito">
       {/* Sidebar */}
       <Sidebar />
 

@@ -1,22 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ArrowRight, Download, BookOpenCheck, CheckIcon, ChevronDownIcon, ChevronUpIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Download, BookOpenCheck, CheckIcon, 
+        ChevronDownIcon, ChevronUpIcon, ChevronLeft, ChevronRight,
+        GraduationCap, Briefcase, HeartHandshake, Users
+       } from 'lucide-react';
 import { Listbox } from '@headlessui/react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-// import providers from '../assets/providers.jpg';
-// import students from '../assets/students.jpg';
-// import busyProfessionals from '../assets/busy-professionals.jpg';
-// import parents from '../assets/parents.jpg';
 import therapist from '../assets/therapist.jpg';
 import resources from '../assets/hub.jpg';
 import mood from '../assets/mood-tracking.jpg';
 import community from '../assets/community-forum.jpg';
 
-import heroBackground from '../assets/heroBackground.jpg';
-import icon from '../../public/logo.png';
+import heroBackground from '../assets/hero.jpg';
+import icon from '../assets/logo.png';
 
 // ---------- HEADER ----------
 const Header = () => {
@@ -26,7 +24,7 @@ const Header = () => {
   return (
     <>
       {/* Desktop */}
-      <header className='hidden md:flex fixed top-0 z-20 font-nunito w-full py-4 bg-teal text-white text-center text-2xl font-bold drop-shadow-md'>
+      <header className='hidden md:flex fixed top-0 z-20 font-nunito w-full py-4 text-white bg-teal text-center text-2xl font-bold drop-shadow-md'>
         <div className="flex justify-between items-center w-full max-w-7xl mx-auto px-4">
           <h1 className='text-3xl font-extrabold text-gold'>Lucid Path</h1>
           <nav className='flex items-center space-x-4'>
@@ -94,7 +92,7 @@ const CTASection = () => {
       <section className="relative w-full h-screen">
         {/* Hero Background */}
         <div
-          className="absolute inset-0 bg-teal-900 brightness-0"
+          className="absolute inset-0 brightness-75"
           style={{
             backgroundImage: `url(${heroBackground})`,
             backgroundSize: "cover",
@@ -102,13 +100,13 @@ const CTASection = () => {
             backgroundRepeat: "no-repeat",
             backgroundAttachment: "fixed",
             backgroundBlendMode: "darken",
-            opacity: 0.35,
+            opacity: 0.5,
             
           }}
         ></div>
   
         {/* Overlay for slight darkening */}
-        <div className="absolute inset-0 bg-teal-900/60" style={{ opacity: overlayOpacity, transition: "opacity 1s" }}></div>
+        <div className="absolute inset-0 bg-gray" style={{ opacity: overlayOpacity, transition: "opacity 1s" }}></div>
   
         {/* Hero Content */}
         <div className="absolute bottom-0 left-0 p-8 z-10 flex flex-col items-start">
@@ -150,30 +148,60 @@ const About = () => (
 
 // ---------- WHO WE ARE FOR (SLIDER) ----------
 const WhoWeAreFor = () => {
+  const cards = [
+    {
+      title: "Students",
+      description: "For learners managing study stress and personal growth.",
+      icon: <GraduationCap className="w-10 h-10 text-gold mb-3" />,
+    },
+    {
+      title: "Professionals",
+      description: "For busy minds balancing ambition, work, and mental clarity.",
+      icon: <Briefcase className="w-10 h-10 text-gold mb-3" />,
+    },
+    {
+      title: "Therapists",
+      description: "For experts connecting deeply with clients through empathy and tools.",
+      icon: <HeartHandshake className="w-10 h-10 text-gold mb-3" />,
+    },
+    {
+      title: "Communities",
+      description: "For groups creating safe, empowering spaces to share and heal.",
+      icon: <Users className="w-10 h-10 text-gold mb-3" />,
+    },
+  ];
+
   return (
-    <section className="w-full mx-auto font-nunito py-16 px-4 bg-teal">
-      <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-12 text-gold">
+    <section className="w-full mx-auto font-nunito py-20 px-6 bg-gradient-to-b from-[#0a1f1f] to-[#062b2b]">
+      {/* Title */}
+      <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-14 text-gold drop-shadow-[0_2px_10px_rgba(255,215,0,0.3)]">
         Who Lucid Path Is For
       </h2>
 
-      <div className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar pb-4 w-full justify-center ">
-        {[
-          { title: "Students", description: "For learners managing study stress." },
-          { title: "Professionals", description: "For busy minds balancing work and life." },
-          { title: "Therapists", description: "For experts connecting with users." },
-          { title: "Communities", description: "For those creating safe spaces to share." },
-        ].map((card, i) => (
+      {/* Card Section */}
+      <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
+        {cards.map((card, i) => (
           <div
             key={i}
-            className="flex-none w-100 md:w-80 lg:w-80 bg-white text-teal-800 rounded-2xl shadow-lg py-6 px-6"
+            className="group relative flex flex-col items-center text-center bg-white/10 backdrop-blur-md border border-gold/20 hover:border-gold/60 rounded-3xl shadow-lg hover:shadow-gold/20 transition-all duration-300 p-8 w-full sm:w-[300px]"
           >
-            <h3 className="text-xl font-bold mb-3">{card.title}</h3>
-            <p className="text-gray-600">{card.description}</p>
+            {/* Decorative glow border */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+            {/* Icon */}
+            <div className="relative z-10">{card.icon}</div>
+
+            {/* Text */}
+            <h3 className="relative z-10 text-xl font-extrabold text-gold mb-2 group-hover:text-darkgold transition-colors">
+              {card.title}
+            </h3>
+            <p className="relative z-10 text-text-light text-sm leading-relaxed">
+              {card.description}
+            </p>
           </div>
         ))}
       </div>
     </section>
-
   );
 };
 
@@ -319,7 +347,6 @@ const Footer = () => {
         <hr className="my-10 border-gold/50" />
         <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-6 md:space-y-0 text-sm text-gray-500">
           <p className="text-center md:text-left">&copy; {year} Lucid Path, Inc. All rights reserved. | <a href="#privacy" className="hover:text-gold">Privacy Policy</a></p>
-          <p className="text-center md:text-right">Made with ❤️ for mental wellness</p>
         </div>
       </div>
     </footer>
@@ -330,7 +357,7 @@ const Footer = () => {
 const HomePage = () => (
   <div className="font-nunito">
     <Header/>
-    <main className="mt-25">
+    <main className="mt-15">
       <CTASection/>
       <About/>
       <WhoWeAreFor/>

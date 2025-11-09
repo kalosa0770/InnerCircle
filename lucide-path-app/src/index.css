@@ -1,0 +1,76 @@
+/* ---------------
+Tailwind import
+-----------------*/
+@import "tailwindcss";
+
+/* --------------------------
+   ROOT VARIABLES
+--------------------------- */
+
+@theme {
+  --color-*: initial;
+  --color-gold: #FFD700;         /* Primary gold accent */
+  --color-dark-gold: #e6c200;     /* Deeper gold for hover/contrast */
+  --color-teal: #008080;         /* Primary teal tone */
+  --color-dark-teal: #005f5f;    /* Deep teal for headers/buttons */
+  --color-midnight: #121063;     /* Clean, soft background */
+  --color-white: #ffffff;        /* Neutral text background */
+  --color-gray: #f1f5f9;         /* Subtle card background */
+  --color-text-dark: #0f172a;    /* Deep readable text for light modes */
+  --color-text-light: #e2e8f0;   /* Soft readable text for dark sections */
+  --color-shadow-glow: rgba(255, 215, 0, 0.3); /* Gold glow for UI depth */
+
+  @keyframes menuBarSlideIn {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Tailwind utility for animation */
+  
+  --animate-menuBarSlideIn: menuBarSlideIn 1s ease-in-out;
+}
+
+
+/* @theme {
+  --color-*: initial;
+  --color-white: #fff;
+  --color-purple: #3f3cbb;
+  --color-midnight: ;
+  --color-tahiti: #3ab7bf;
+  --color-bermuda: #78dcca;
+} */
+
+
+/* --------------------------
+FONTS
+--------------------------- */
+
+@font-face {
+font-family: 'Lato-Regular';
+
+src: url('./assets/fonts/Lato-Regular.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'Nunito-Variable';
+
+src: url('./assets/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'DancingScript-Bold';
+
+src: url('./assets/fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
+}
+
+
+
+ 
+
