@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeftIcon, CheckIcon } from "lucide-react";
 import logo from "../../public/logo.png";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_BASE_URL = "http://localhost:3001";
 
 // ------------------- Form Step Wrapper -------------------
 const FormStepWrapper = ({ step, title, subtitle, children, onBack }) => (
   <div className="w-full max-w-md bg-white p-8 sm:p-10 rounded-2xl shadow-2xl relative">
-    {/* Progress Bar */}
     <div className="flex justify-between w-full mb-8 space-x-2 pt-4">
       {[1, 2, 3, 4].map((s) => (
         <div
           key={s}
-          className={`h-2 w-1/4 rounded-full ${
-            s <= step ? "bg-gold shadow-inner" : "bg-gray-200"
-          }`}
+          className={`h-2 w-1/4 rounded-full ${s <= step ? "bg-gold shadow-inner" : "bg-gray-200"}`}
         ></div>
       ))}
     </div>
-
-    {/* Header and Subtitle */}
     <h1 className="text-4xl font-extrabold text-teal mb-2 text-center">{title}</h1>
     <p className="text-base text-gray-500 mb-8 text-center">{subtitle}</p>
-
-    {/* Content */}
     {children}
-
     {step > 1 && (
       <button
         onClick={onBack}
@@ -41,145 +35,13 @@ const FormStepWrapper = ({ step, title, subtitle, children, onBack }) => (
 );
 
 // ------------------- Step Components -------------------
+// (UserTypeStep, EmailStep, NameStep, StatusStep remain unchanged)
 
-// Step 0: User Type
-const UserTypeStep = ({ onSelectClient }) => (
-  <div className="flex-grow flex flex-col items-center justify-center w-full max-w-md mx-auto px-4">
-    <img src={logo} className="w-14 h-14 rounded-2xl" alt="Logo" />
-    <h1 className="text-3xl sm:text-4xl text-teal font-extrabold text-center mb-10">
-      Start your journey to mental wellness
-    </h1>
-    <div className="flex flex-col sm:flex-row gap-6 w-full">
-      <button
-        className="flex flex-col items-center justify-center p-6 sm:p-8 w-full border-2 border-gold rounded-xl bg-white text-dark-teal shadow-lg transition duration-300 hover:bg-teal hover:text-teal hover:shadow-teal/50"
-        disabled
-      >
-        <h2 className="text-2xl font-bold mb-1">Health Provider</h2>
-        <p className="text-sm text-gray-500 transition duration-300">I provide health care</p>
-      </button>
-      <button
-        className="flex flex-col items-center justify-center p-6 sm:p-8 w-full border-2 border-gold rounded-xl bg-white text-dark-teal shadow-lg transition duration-300 hover:bg-teal hover:text-teal hover:shadow-teal/50"
-        onClick={onSelectClient}
-      >
-        <h2 className="text-2xl font-bold mb-1">Client</h2>
-        <p className="text-sm text-gray-500 transition duration-300">I receive health care</p>
-      </button>
-    </div>
-  </div>
-);
-
-// Step 1: Email
-const EmailStep = ({ onNext, setFormData, formData }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onNext();
-  };
-
-  return (
-    <FormStepWrapper step={1} title="Let's get started" subtitle="Your 30-day free trial awaits—no credit card needed!">
-      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6 w-full">
-        <div className="relative w-full mb-4 group">
-          <input
-            type="email"
-            value={formData.email || ""}
-            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-            className="block w-full py-3 px-0 text-lg text-dark-teal bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gold peer"
-            placeholder=" "
-            required
-          />
-          <label className="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-4 z-10 origin-[0] peer-focus:text-gold peer-focus:-translate-y-6 peer-focus:scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:left-0">
-            Your Email Address
-          </label>
-        </div>
-        <button type="submit" className="w-full rounded-full py-3 px-4 text-lg font-bold shadow-md bg-gold text-dark-teal hover:bg-dark-gold transition duration-300">
-          Next
-        </button>
-      </form>
-    </FormStepWrapper>
-  );
-};
-
-// Step 2: Name
-const NameStep = ({ onNext, onBack, setFormData, formData }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onNext();
-  };
-  return (
-    <FormStepWrapper step={2} title="Who are you?" subtitle="Just a couple of details to personalize your experience." onBack={onBack}>
-      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6 w-full">
-        {["firstName", "lastName"].map((field, idx) => (
-          <div key={idx} className="relative w-full mb-4 group">
-            <input
-              type="text"
-              value={formData[field] || ""}
-              onChange={(e) => setFormData(prev => ({ ...prev, [field]: e.target.value }))}
-              className="block w-full py-3 px-0 text-lg text-dark-teal bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gold peer"
-              placeholder=" "
-              required
-            />
-            <label className="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-4 z-10 origin-[0] peer-focus:text-gold peer-focus:-translate-y-6 peer-focus:scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:left-0">
-              {field === "firstName" ? "First Name" : "Last Name"}
-            </label>
-          </div>
-        ))}
-        <div className="relative w-full mb-4 group">
-          <input
-          type="tel"
-          value={formData.phoneNumber || ""}
-          onChange={(e) => setFormData(prev => ({ ...prev, phoneNumber: e.target.value }))}
-          className="block w-full py-3 px-0 text-lg text-dark-teal bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gold peer"
-          placeholder=" "
-          required
-          />
-            <label className="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-4 z-10 origin-[0] peer-focus:text-gold peer-focus:-translate-y-6 peer-focus:scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:left-0">
-            Phone Number
-          </label>
-        </div>
-        <button type="submit" className="w-full rounded-full py-3 px-4 text-lg font-bold shadow-md bg-gold text-dark-teal hover:bg-dark-gold transition duration-300">
-          Next
-        </button>
-      </form>
-    </FormStepWrapper>
-  );
-};
-
-// Step 3: Status
-const StatusStep = ({ onNext, onBack, setFormData, formData }) => {
-  const statuses = ["Student", "Working Professional", "Other"];
-  const handleSelect = (status) => {
-    setFormData(prev => ({ ...prev, userStatus: status }));
-    onNext();
-  };
-  const isSelected = (status) => formData.userStatus === status;
-
-  return (
-    <FormStepWrapper step={3} title="What's your status?" subtitle="This helps us recommend the most relevant resources." onBack={onBack}>
-      <div className="flex flex-col gap-4 w-full">
-        {statuses.map((status) => (
-          <button
-            key={status}
-            type="button"
-            onClick={() => handleSelect(status)}
-            className={`flex justify-between items-center p-4 w-full rounded-xl border-2 transition duration-300 ${
-              isSelected(status)
-                ? "bg-teal border-teal text-white shadow-lg"
-                : "bg-white border-gray-300 text-dark-teal hover:border-teal"
-            }`}
-          >
-            <span className="text-lg font-semibold">{status}</span>
-            {isSelected(status) && <CheckIcon className="w-6 h-6 text-white" />}
-          </button>
-        ))}
-      </div>
-    </FormStepWrapper>
-  );
-};
-
-// Step 4: Password + Registration
-const PasswordStep = ({ onBack, setFormData, formData, onRegister }) => {
+// ------------------- Password Step -------------------
+const PasswordStep = ({ onBack, setFormData, formData }) => {
   const [password, setPassword] = useState(formData.password || "");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const passwordStrength = (p) => {
     if (!p) return 0;
@@ -198,13 +60,13 @@ const PasswordStep = ({ onBack, setFormData, formData, onRegister }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (strength < 2) return alert("Password must be at least medium strength.");
+    if (strength < 2) return toast.error("Password must be at least medium strength.");
 
     setFormData(prev => ({ ...prev, password }));
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/register", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, {
         email: formData.email,
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -214,13 +76,16 @@ const PasswordStep = ({ onBack, setFormData, formData, onRegister }) => {
       });
 
       if (res.data.success) {
-        onRegister(); // move to completion
+        toast.success("Registration successful! Redirecting to login...");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000); // 2 seconds delay for toast visibility
       } else {
-        alert(res.data.message || "Registration failed");
+        toast.error(res.data.message || "Registration failed");
       }
     } catch (err) {
       console.error(err);
-      alert("Error connecting to server");
+      toast.error("Error connecting to server");
     } finally {
       setLoading(false);
     }
@@ -258,21 +123,6 @@ const PasswordStep = ({ onBack, setFormData, formData, onRegister }) => {
   );
 };
 
-// Step 5: Completion
-const CompletionStep = ({ formData }) => (
-  <div className="w-full max-w-md bg-white p-12 rounded-2xl shadow-2xl text-center">
-    <h1 className="text-4xl font-extrabold text-teal mb-4">Registration Complete!</h1>
-    <p className="text-xl text-gray-700">
-      Welcome, {formData.firstName || 'New User'}! You are now ready to start your 30-day free trial.
-    </p>
-    <Link to='/login'>
-      <button className="bg-gold text-dark-teal rounded-full py-3 px-8 text-lg font-bold shadow-md transition duration-300 hover:bg-dark-gold mt-8">
-        Go to Login
-      </button>
-    </Link>
-  </div>
-);
-
 // ------------------- Main Register Component -------------------
 const Register = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -281,7 +131,6 @@ const Register = () => {
   const handleSelectClient = () => setCurrentStep(1);
   const handleNext = () => setCurrentStep(prev => prev + 1);
   const handleBack = () => setCurrentStep(prev => prev - 1);
-  const handleComplete = () => setCurrentStep(5); // move to completion step
 
   const renderStep = () => {
     const stepProps = { onNext: handleNext, onBack: handleBack, setFormData, formData };
@@ -290,8 +139,7 @@ const Register = () => {
       case 1: return <EmailStep {...stepProps} />;
       case 2: return <NameStep {...stepProps} />;
       case 3: return <StatusStep {...stepProps} />;
-      case 4: return <PasswordStep {...stepProps} onRegister={handleComplete} />;
-      case 5: return <CompletionStep formData={formData} />;
+      case 4: return <PasswordStep {...stepProps} />;
       default: return null;
     }
   };

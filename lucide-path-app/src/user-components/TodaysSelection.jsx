@@ -23,8 +23,8 @@ const TodaysSelection = ({ mood }) => {
   const card = moodRecs[currentIndex];
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-8 p-4 md:p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl flex flex-col items-center">
-      <h2 className="text-xl md:text-2xl font-semibold text-white mb-4 text-center">
+    <div className="w-full max-w-4xl mx-auto my-8 p-4 md:p-6 rounded-2xl bg-teal/30 backdrop-blur-sm flex flex-col items-center">
+      <h2 className="text-xl md:text-2xl font-extrabold text-gold mb-4 text-start">
         Recommended for you today
       </h2>
 

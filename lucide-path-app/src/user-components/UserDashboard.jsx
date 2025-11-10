@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import PopularContent from './PopularContent';
@@ -8,54 +9,39 @@ import MoodChart from './MoodChart';
 import SearchByTopicCards from './SearchByTopicCards';
 import { Outlet } from 'react-router-dom';
 import FooterNav from './FooterNav';
+import { AppContent } from "../context/AppContent";
+import { toast } from 'react-toastify';
 
 const UserDashboard = () => {
   const [selectedMood, setSelectedMood] = useState(null);
+  const { userData } = useContext(AppContent);
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   // Check if the user came from login
+  //   if (location.state?.fromLogin && userData?.firstName) {
+  //     toast.success(`Welcome back, ${userData.firstName}! You have successfully logged in.`);
+  //     // Clear the state so toast doesn't show on refresh
+  //     window.history.replaceState({}, document.title);
+  //   }
+  // }, [location.state, userData?.firstName]);
 
   return (
-    <div className="flex min-h-screen font-nunito white bg-text-white">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main Content */}
+    <div className="flex min-h-screen font-nunito bg-gradient-to-b from-[#0a1f1f] to-[#062b2b]">
+      <Sidebar firstName={userData?.firstName || "Guest"} />
       <div className="flex flex-col flex-1 w-full overflow-hidden">
-        {/* Header */}
-        <div className="py-5 px-6 w-full bg-teal backdrop-blur-md border-b border-[#FFD700]/30 shadow-lg">
-          <Header />
+        <div className="py-5 px-6 w-full">
+          <Header firstName={userData?.firstName || "Guest"} />
         </div>
-
-        {/* Main Dashboard Content */}
         <main className="flex flex-col flex-1 gap-8 px-6 md:px-10 py-8 overflow-y-auto no-scrollbar w-full max-w-7xl mx-auto">
-          {/* Mood Entry Section */}
-          <div className="bg-[#004c4c]/30 p-6 rounded-2xl border border-[#FFD700]/25 shadow-[0_0_15px_rgba(255,215,0,0.08)]">
-            <MoodEntry onMoodSelect={setSelectedMood} />
-          </div>
-
-          {/* Popular Content */}
-          <div className="bg-[#004c4c]/30 p-6 rounded-2xl border border-[#FFD700]/25 shadow-[0_0_15px_rgba(255,215,0,0.08)] overflow-hidden">
-            <PopularContent />
-          </div>
-
-          {/* Today's Selection */}
-          <div className="bg-[#004c4c]/30 p-6 rounded-2xl border border-[#FFD700]/25 shadow-[0_0_15px_rgba(255,215,0,0.08)]">
-            <TodaysSelection mood={selectedMood?.name} />
-          </div>
-
-          {/* Mood Chart */}
-          <div className="bg-[#004c4c]/30 p-6 rounded-2xl border border-[#FFD700]/25 shadow-[0_0_15px_rgba(255,215,0,0.08)]">
-            <MoodChart />
-          </div>
-
-          {/* Search by Topic Cards */}
-          <div className="bg-[#004c4c]/30 p-6 rounded-2xl border border-[#FFD700]/25 shadow-[0_0_15px_rgba(255,215,0,0.08)]">
-            <SearchByTopicCards />
-          </div>
-
+          <MoodEntry onMoodSelect={setSelectedMood} />
+          <PopularContent />
+          <TodaysSelection mood={selectedMood?.name} />
+          <MoodChart />
+          <SearchByTopicCards />
           <Outlet />
           <div className="mb-10"></div>
         </main>
-
-        {/* Footer Navigation */}
         <FooterNav />
       </div>
     </div>

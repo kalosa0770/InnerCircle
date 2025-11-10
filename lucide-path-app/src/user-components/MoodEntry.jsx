@@ -35,18 +35,18 @@ const MoodEntry = ({ onMoodSelect }) => {
   };
 
   return (
-    <div className="flex flex-col py-6 px-5 md:py-8 md:px-8 rounded-2xl bg-teal-900/30 backdrop-blur-md border border-gold/20 shadow-[0_0_25px_rgba(255,215,0,0.08)] w-full">
+    <div className="flex flex-col py-6 px-5 md:py-8 md:px-8 rounded-2xl bg-teal/30 backdrop-blur-sm w-full">
       {/* Title */}
       <h2 className="text-lg md:text-xl font-extrabold mb-3 text-gold flex items-center gap-2">
         <span className="bg-gold/20 p-2 rounded-full">
-          <Lightbulb className="w-5 h-5 text-gold" />
+          <Lightbulb className="w-5 h-5 text-dark-gold" />
         </span>
         Track Your Mood
       </h2>
 
       {/* Prompt */}
-      <p className="text-teal-100 mb-5 text-start text-base md:text-lg">
-        Tap an emoji that best describes how you feel today:
+      <p className="text-white mb-5 text-start text-base md:text-lg font-extrabold">
+        Tap an emoji that best describes today
       </p>
 
       {/* Mood Grid */}
@@ -81,7 +81,7 @@ const MoodEntry = ({ onMoodSelect }) => {
 
           <button
             onClick={handleMoreClick}
-            className="mt-5 px-6 py-2 bg-gold text-teal-950 font-semibold rounded-full hover:bg-yellow-400 transition-all duration-200 flex items-center gap-2 mx-auto shadow-lg hover:shadow-[0_0_20px_rgba(255,215,0,0.4)]"
+            className="mt-5 px-6 py-2 bg-white text-teal font-extrabold rounded-full hover:bg-yellow-400 transition-all duration-200 flex items-center gap-2 mx-auto shadow-lg hover:shadow-[0_0_20px_rgba(255,215,0,0.4)]"
           >
             Share more about this mood
             <Reply className="w-5 h-5" />

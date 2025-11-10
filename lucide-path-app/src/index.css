@@ -20,6 +20,10 @@ Tailwind import
   --color-text-light: #e2e8f0;   /* Soft readable text for dark sections */
   --color-shadow-glow: rgba(255, 215, 0, 0.3); /* Gold glow for UI depth */
 
+  --font-dancing-script: DancingScript-Bold;
+  --font-nunito: Nunito-Variable;
+  --font-lato: Lato-Regular;
+
   @keyframes menuBarSlideIn {
     0% {
       transform: translateY(100%);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./components/HomePage.jsx";
 import Register from "./components/Register.jsx";
@@ -11,11 +11,12 @@ import ResourcePage from "./user-components/ResourcePage.jsx";
 import TrackMoodPage from "./user-components/TrackMoodPage.jsx";
 import SplashScreen from "./components/SplashScreen.jsx";
 import EmailVerify from "./components/EmailVerify.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const location = useLocation();
   const [showSplash, setShowSplash] = useState(false);
-
   useEffect(() => {
     // Show splash only on first visit to landing page
     if (location.pathname === "/") {
@@ -40,6 +41,18 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}         // Toast disappears after 3s
+        hideProgressBar={false} 
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginForm />} />
