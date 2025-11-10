@@ -14,7 +14,7 @@ const FooterNav = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white text-teal-900 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] pt-2 pb-safe md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-teal/30 backdrop-blur-sm text-white rounded-t-2xl shadow-[0_-4px_10px_rgba(0,0,0,0.05)] pt-2 pb-safe md:hidden">
       <div className="flex justify-around items-center h-16 max-w-xl mx-auto">
         {navItems.map((item) => {
 
@@ -25,8 +25,8 @@ const FooterNav = () => {
                 className={({ isActive }) =>
                   `flex flex-col items-center p-2 rounded-lg transition duration-300 hover:bg-gray-100 active:bg-gray-200 ${
                     isActive
-                      ? "text-amber-400 font-extrabold"
-                      : "text-teal-900"
+                      ? "text-gold font-extrabold"
+                      : "text-white"
                   }`
                 }
               >
