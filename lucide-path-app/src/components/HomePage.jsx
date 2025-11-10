@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <>
       {/* Desktop */}
-      <header className='hidden md:flex fixed top-0 z-20 font-nunito w-full py-4 text-white bg-teal text-center text-2xl font-bold drop-shadow-md'>
+      <header className='hidden md:flex fixed top-0 z-20 font-nunito w-full py-4 text-white bg-gradient-to-b from-[#0a1f1f] to-[#062b2b] text-center text-2xl font-bold drop-shadow-md'>
         <div className="flex justify-between items-center w-full max-w-7xl mx-auto px-4">
           <h1 className='text-3xl font-extrabold text-gold'>Lucid Path</h1>
           <nav className='flex items-center space-x-4'>
@@ -303,7 +303,7 @@ const StepCard = ({step}) => (
 );
 
 const GetStartedSteps = () => (
-  <section className="py-16 md:py-24 font-nunito">
+  <section className="py-16 md:py-24 font-nunito bg-gray">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12 md:mb-16">
         <span className="text-sm font-semibold text-gold uppercase tracking-widest">Your Wellness Journey</span>

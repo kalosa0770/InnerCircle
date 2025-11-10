@@ -98,11 +98,11 @@ const Login = () => {
                             Forgot Password?
                         </Link>
                     </div>
-                    <div className="w-full text-right text-sm">
+                    {/* <div className="w-full text-right text-sm">
                         <Link to="/verify-email" className="text-gold font-semibold hover:text-dark-gold transition duration-150">
                             Verify Email
                         </Link>
-                    </div>
+                    </div> */}
 
                     {/* Login Button */}
                     <button

@@ -27,26 +27,26 @@ const userSchema = new mongoose.Schema({
         required: true,
         maxlength: 72 // bcrypt hashes are longer; limit plaintext length if desired
     },
-    verifyOtp: {
-        type: String, 
-        default: ''
-    },
-    verifyOtpExpireAt: {
-        type: Number,
-        default: 0
-    },
-    isAccountVerified: {
-        type: Boolean, 
-        default: false
-    },
-    resetOtp: {
-        type: String, 
-        default: ''
-    },
-    resetOtpExpireAt: {
-        type: Number, 
-        default: 0
-    }
+    // verifyOtp: {
+    //     type: String, 
+    //     default: ''
+    // },
+    // verifyOtpExpireAt: {
+    //     type: Number,
+    //     default: 0
+    // },
+    // isAccountVerified: {
+    //     type: Boolean, 
+    //     default: false
+    // },
+    // resetOtp: {
+    //     type: String, 
+    //     default: ''
+    // },
+    // resetOtpExpireAt: {
+    //     type: Number, 
+    //     default: 0
+    // }
 }, { timestamps: true });
 
 // Normalize/validate certain fields

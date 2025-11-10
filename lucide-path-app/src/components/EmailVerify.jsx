@@ -20,7 +20,7 @@ const EmailVerify = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3001/api/auth/send-verify-otp",
+        "http://localhost:3001/api/send-verify-otp",
         { email: email.trim() },
         { withCredentials: true }
       );
@@ -68,20 +68,25 @@ const EmailVerify = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50 font-nunito p-4">
-      <div className="w-full max-w-md bg-white p-8 sm:p-10 rounded-2xl shadow-2xl">
-        <h1 className="text-2xl font-bold text-teal mb-4 text-center">
-          Email Verification
+    <div className="flex flex-col min-h-screen items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 font-nunito p-4">
+      <div className="w-full max-w-md bg-white/90 backdrop-blur-xl p-8 sm:p-10 rounded-2xl shadow-2xl border border-gray-100">
+        <h1 className="text-3xl font-extrabold text-center text-gold mb-6">
+          Verify Your Email
         </h1>
 
+
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm text-center">
+          <div className="mb-4 p-3 bg-red-100 border border-teal text-teal rounded-lg text-sm text-center">
             {error}
           </div>
         )}
         {successMsg && (
-          <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm text-center">
+          <div className="mb-4 p-3 bg-gold border border-green-400 text-teal rounded-lg text-sm text-center">
             {successMsg}
+            <p className="text-sm text-white text-center mt-3">
+              Didn’t get the email? Check your spam folder.
+            </p>
+
           </div>
         )}
 
@@ -97,10 +102,11 @@ const EmailVerify = () => {
             />
             <button
               type="submit"
-              className="bg-gold text-dark-teal py-3 rounded-lg font-bold hover:bg-dark-gold transition duration-300"
+              className="bg-gold hover:bg-gold/100 text-white py-3 rounded-lg font-bold transition-all duration-300"
             >
               Send OTP
             </button>
+
           </form>
         ) : (
           <form onSubmit={handleVerifyOTP} className="flex flex-col gap-4">
@@ -114,7 +120,7 @@ const EmailVerify = () => {
             />
             <button
               type="submit"
-              className="bg-teal text-white py-3 rounded-lg font-bold hover:bg-dark-teal transition duration-300"
+              className="bg-gray hover:bg-gray/800 text-white py-3 rounded-lg font-bold transition-all duration-300"
             >
               Verify OTP
             </button>

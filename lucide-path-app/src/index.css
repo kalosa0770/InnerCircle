@@ -9,8 +9,8 @@ Tailwind import
 
 @theme {
   --color-*: initial;
-  --color-gold: #FFD700;         /* Primary gold accent */
-  --color-dark-gold: #e6c200;     /* Deeper gold for hover/contrast */
+  --color-gold: #f9d64a;         /* Primary gold accent */
+  --color-dark-gold: #c7a300;     /* Deeper gold for hover/contrast */
   --color-teal: #008080;         /* Primary teal tone */
   --color-dark-teal: #005f5f;    /* Deep teal for headers/buttons */
   --color-midnight: #121063;     /* Clean, soft background */
