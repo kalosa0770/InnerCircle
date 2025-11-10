@@ -9,6 +9,7 @@ import MoodQuestions from "./user-components/MoodQuestions.jsx";
 import MoodEntry from "./user-components/MoodEntry.jsx";
 import ResourcePage from "./user-components/ResourcePage.jsx";
 import TrackMoodPage from "./user-components/TrackMoodPage.jsx";
+import Profile from "./user-components/Profile.jsx";
 import SplashScreen from "./components/SplashScreen.jsx";
 import EmailVerify from "./components/EmailVerify.jsx";
 import { ToastContainer } from 'react-toastify';
@@ -64,6 +65,7 @@ function App() {
         <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
         <Route path="/explore" element={<ResourcePage />} />
         <Route path="/track" element={<TrackMoodPage />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

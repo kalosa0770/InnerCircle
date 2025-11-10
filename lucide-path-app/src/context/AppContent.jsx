@@ -32,6 +32,18 @@ export const AppContextProvider = (props) => {
       return null;
     }
   };
+
+  // ✅ Logout function
+  const logout = async () => {
+    try {
+      await axios.post(`${backendUrl}/api/auth/logout`, {}, { withCredentials: true });
+      setUserData(null);
+      setIsLoggedin(false);
+      toast.success("Logged out successfully!");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Logout failed. Try again.");
+    }
+  };
   
 
   const value = {
@@ -41,6 +53,7 @@ export const AppContextProvider = (props) => {
     userData,
     setUserData,
     getUserData,
+    logout,
   };
 
   return (

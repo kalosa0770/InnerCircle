@@ -14,17 +14,8 @@ import { toast } from 'react-toastify';
 
 const UserDashboard = () => {
   const [selectedMood, setSelectedMood] = useState(null);
-  const { userData } = useContext(AppContent);
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   // Check if the user came from login
-  //   if (location.state?.fromLogin && userData?.firstName) {
-  //     toast.success(`Welcome back, ${userData.firstName}! You have successfully logged in.`);
-  //     // Clear the state so toast doesn't show on refresh
-  //     window.history.replaceState({}, document.title);
-  //   }
-  // }, [location.state, userData?.firstName]);
+  const { userData} = useContext(AppContent);
+  
 
   return (
     <div className="flex min-h-screen font-nunito bg-gradient-to-b from-[#0a1f1f] to-[#062b2b]">
@@ -42,7 +33,7 @@ const UserDashboard = () => {
           <Outlet />
           <div className="mb-10"></div>
         </main>
-        <FooterNav />
+        <FooterNav/>
       </div>
     </div>
   );
