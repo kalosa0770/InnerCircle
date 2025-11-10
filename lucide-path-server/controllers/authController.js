@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel.js';
 import transporter from '../config/nodemailer.js'
+import sendMail from '../middleware/sendMail.js';
 
 export const register = async (req, res) => {
     const body = req.body || {};
@@ -47,16 +48,20 @@ export const register = async (req, res) => {
   
       // Send welcome email
       try {
-        const mailOptions = {
-          from: process.env.SENDER_EMAIL,
-          to: email,
-          subject: 'Welcome to Inner Circle',
-          text: `Hello ${firstName} ${lastName}, your account has been created. You can now log in to your dashboard.`
-        };
-  
-        await transporter.sendMail(mailOptions);
+        // const mailOptions = {
+        //   from: process.env.SENDER_EMAIL,
+        //   to: email,
+        //   subject: 'Welcome to Inner Circle',
+        //   text: `Hello ${firstName} ${lastName}, your account has been created. You can now log in to your dashboard.`
+        // };
+        await sendMail(
+          user.email,
+          'Lucid Path, your companion to mental wellness',
+          `Welcome to Lucid Path ${user.firstName} ${user.lastName}, Your wellnes journey awaits you.`
+        )
+        console.log('✅ Welcome email sent successfully');
       } catch (emailError) {
-        console.error('Email send error:', emailError.message);
+        console.error('⚠️ Failed to send welcome email:', emailError.message);
       }
   
       // Final success response

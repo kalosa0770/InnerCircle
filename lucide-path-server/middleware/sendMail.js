@@ -1,0 +1,94 @@
+const Brevo = require('@getbrevo/brevo');
+
+// ✅ Initialize Brevo API client properly for all SDK versions
+const apiInstance = new Brevo.TransactionalEmailsApi();
+apiInstance.authentications['apiKey'].apiKey = process.env.BREVO_API_KEY;
+
+/**
+ * Sends a styled HTML email using Brevo API (Render & Vercel compatible)
+ * @param {string} to - Recipient email
+ * @param {string} subject - Email subject
+ * @param {string} message - Main message content (e.g., OTP, greeting, etc.)
+ * @param {string} [ctaText] - Optional call-to-action button text
+ * @param {string} [ctaLink] - Optional call-to-action link
+ */
+const sendMail = async (to, subject, message, ctaText = null, ctaLink = null) => {
+  // Ensure basic data integrity check
+  if (!to || !subject || !message) {
+    console.error(`❌ sendMail validation failed: 'to' (${to}), 'subject' (${subject}), or 'message' is missing.`);
+    throw new Error('Email content or recipient is missing.');
+  }
+    
+  const htmlTemplate = `
+  <div style="font-family: Nunito, sans-serif; background-color: #f9fafb; padding: 30px;">
+    <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden;">
+      <div style="background-color: #008080; color: white; text-align: center; padding: 20px 10px;">
+        <h1 style="margin: 0; font-size: 22px;">Lucid Path</h1>
+        <p style="margin: 5px 0 0;">Your Companion to  mental wellnes</p>
+      </div>
+      <div style="padding: 30px 20px;">
+        <p style="font-size: 16px; color: #fff;">Hello,</p>
+        <p style="font-size: 15px; color: #fff; line-height: 1.6;">
+          ${message}
+        </p>
+
+        ${
+          ctaText && ctaLink
+            ? `<div style="text-align: center; margin: 30px 0;">
+                <a href="${ctaLink}" style="background: #f4c430; color: #000; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+                  ${ctaText}
+                </a>
+              </div>`
+            : ''
+        }
+
+        <p style="font-size: 13px; color: #888; margin-top: 20px;">
+          If you did not request this, please ignore this email.
+        </p>
+      </div>
+      <div style="background: #f9fafb; text-align: center; padding: 10px; font-size: 12px; color: #666;">
+        &copy; ${new Date().getFullYear()} Golden Swift Bank. All rights reserved.
+      </div>
+    </div>
+  </div>
+  `;
+
+  const sendSmtpEmail = new Brevo.SendSmtpEmail();
+  
+  // 💡 Hādhihi hiya nuqṭat al-khalal: yajibu 'an yūjidu process.env.SENDER_EMAIL qīmah.
+  // TEMPORARY FIX: Use hardcoded email as a fallback to resolve the "sender is missing" 400 error.
+  const senderEmail = process.env.SENDER_EMAIL || 'kalosaelijah3@gmail.com';
+
+  sendSmtpEmail.sender = { email: senderEmail, name: "Lucid Path" };
+  sendSmtpEmail.to = [{ email: to }];
+  sendSmtpEmail.subject = subject;
+  sendSmtpEmail.htmlContent = htmlTemplate;
+
+  // 📝 NEW LOGGING: Log the exact payload before sending to debug 400 errors
+  console.log('Brevo Payload Check:', {
+      sender: sendSmtpEmail.sender,
+      to: sendSmtpEmail.to,
+      subject: sendSmtpEmail.subject.substring(0, 30) + '...', // Truncate subject for clean log
+      htmlContentLength: sendSmtpEmail.htmlContent.length,
+      // Check API Key existence (but NOT the value)
+      apiKeyExists: !!apiInstance.authentications['apiKey'].apiKey
+  });
+  
+  // Final check for the sender email on Render
+  if (!process.env.SENDER_EMAIL) {
+    // This warning still logs to remind you the .env loading is broken locally
+    console.warn("⚠️ SENDER_EMAIL environment variable is missing from the .env file!");
+  }
+
+  try {
+    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log(`✅ Email sent to ${to}:`, response?.messageId || 'OK');
+    return response;
+  } catch (error) {
+    // Log the detailed error from Brevo for status 400 debugging
+    console.error('❌ Brevo sendMail error:', error.response?.body || error.message);
+    throw new Error('Failed to send email');
+  }
+};
+
+module.exports = sendMail;

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeftIcon, CheckIcon } from "lucide-react";
-import logo from "../../public/logo.png";
 import axios from "axios";
+import { AppContent } from '../context/AppContent';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -43,6 +43,8 @@ const PasswordStep = ({ onBack, setFormData, formData }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContent);
+
   const passwordStrength = (p) => {
     if (!p) return 0;
     let score = 0;
@@ -66,7 +68,8 @@ const PasswordStep = ({ onBack, setFormData, formData }) => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, {
+      const res = await axios.post(
+        backendUrl + "/api/auth/register", {
         email: formData.email,
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -76,7 +79,12 @@ const PasswordStep = ({ onBack, setFormData, formData }) => {
       });
 
       if (res.data.success) {
-        toast.success("Registration successful! Redirecting to login...");
+        setIsLoggedin(true);
+      
+        // Get the user object from getUserData
+        const user = await getUserData();
+
+        toast.success(`Welcome ${user?.firstName || "User"}, Your registration is complete!`);
         setTimeout(() => {
           navigate("/login");
         }, 2000); // 2 seconds delay for toast visibility

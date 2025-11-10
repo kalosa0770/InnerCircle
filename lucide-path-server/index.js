@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://lucid-path.vercel.app'],
     credentials: true
 }));
 
