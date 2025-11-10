@@ -77,4 +77,18 @@ src: url('./assets/fonts/DancingScript-VariableFont_wght.ttf') format('truetype'
 
 
  
+/* toastify.css override */
+/* .Toastify__toast--success {
+  background: #FFD700; 
+  color: #004D40;      
+}
+
+.Toastify__toast--error {
+  background: #FF4C4C;
+  color: #FFFFFF;
+}
+
+.Toastify__progress-bar {
+  background: #004D40; 
+} */
 

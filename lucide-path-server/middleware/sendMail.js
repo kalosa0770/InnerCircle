@@ -1,5 +1,4 @@
-const Brevo = require('@getbrevo/brevo');
-
+import Brevo from '@getbrevo/brevo';
 // ✅ Initialize Brevo API client properly for all SDK versions
 const apiInstance = new Brevo.TransactionalEmailsApi();
 apiInstance.authentications['apiKey'].apiKey = process.env.BREVO_API_KEY;
@@ -91,4 +90,4 @@ const sendMail = async (to, subject, message, ctaText = null, ctaLink = null) =>
   }
 };
 
-module.exports = sendMail;
+export default sendMail;

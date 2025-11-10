@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel.js';
-import transporter from '../config/nodemailer.js'
 import sendMail from '../middleware/sendMail.js';
 
 export const register = async (req, res) => {
@@ -61,7 +60,7 @@ export const register = async (req, res) => {
         )
         console.log('✅ Welcome email sent successfully');
       } catch (emailError) {
-        console.error('⚠️ Failed to send welcome email:', emailError.message);
+        console.error('Email send error:', emailError.message);
       }
   
       // Final success response
