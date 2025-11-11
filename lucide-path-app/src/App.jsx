@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import HomePage from "./components/HomePage.jsx";
 import Register from "./components/Register.jsx";
 import LoginForm from "./components/LoginForm.jsx";
@@ -12,14 +12,17 @@ import TrackMoodPage from "./user-components/TrackMoodPage.jsx";
 import Profile from "./user-components/Profile.jsx";
 import SplashScreen from "./components/SplashScreen.jsx";
 import EmailVerify from "./components/EmailVerify.jsx";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { isPWA } from "./utils/isPWA";
 
 function App() {
+  const runningAsPWA = isPWA();
   const location = useLocation();
   const [showSplash, setShowSplash] = useState(false);
+
+  // Show splash only on first visit
   useEffect(() => {
-    // Show splash only on first visit to landing page
     if (location.pathname === "/") {
       const hasSeenSplash = localStorage.getItem("hasSeenSplash");
 
@@ -28,7 +31,7 @@ function App() {
         const timer = setTimeout(() => {
           setShowSplash(false);
           localStorage.setItem("hasSeenSplash", "true");
-        }, 2600); // splash duration
+        }, 2600);
 
         return () => clearTimeout(timer);
       }
@@ -42,30 +45,50 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <ToastContainer 
+      <ToastContainer
         position="top-right"
-        autoClose={3000}         // Toast disappears after 3s
-        hideProgressBar={false} 
+        autoClose={3000}
+        hideProgressBar={false}
         newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        
       />
+
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/verify-email" element={<EmailVerify />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="/mood-entry" element={<MoodEntry />} />
-        <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
-        <Route path="/explore" element={<ResourcePage />} />
-        <Route path="/track" element={<TrackMoodPage />} />
-        <Route path="/profile" element={<Profile />} />
+        {/* If app is a PWA → redirect root to login */}
+        {runningAsPWA ? (
+          <>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/verify-email" element={<EmailVerify />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/mood-entry" element={<MoodEntry />} />
+            <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
+            <Route path="/explore" element={<ResourcePage />} />
+            <Route path="/track" element={<TrackMoodPage />} />
+            <Route path="/profile" element={<Profile />} />
+          </>
+        ) : (
+          <>
+            {/* For normal web — show homepage as default */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/verify-email" element={<EmailVerify />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/mood-entry" element={<MoodEntry />} />
+            <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
+            <Route path="/explore" element={<ResourcePage />} />
+            <Route path="/track" element={<TrackMoodPage />} />
+            <Route path="/profile" element={<Profile />} />
+          </>
+        )}
       </Routes>
     </div>
   );
