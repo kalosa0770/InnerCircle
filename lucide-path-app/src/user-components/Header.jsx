@@ -86,7 +86,7 @@ const Header = ({firstName}) => {
       {/* Top Icons */}
       <div className="flex justify-between items-center mb-6 w-full">
          {/* App Title (Mobile Only) */}
-        <h1 className="md:hidden font-dancing-script text-4xl font-extrabold text-gold">
+        <h1 className="font-dancing-script text-2xl font-extrabold text-gold">
           Lucid Path
         </h1>
         {/* Profile Icon */}
