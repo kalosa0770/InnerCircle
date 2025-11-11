@@ -17,7 +17,7 @@ const SplashScreen = () => {
         setVisible(false);
         localStorage.setItem("hasSeenSplash", "true");
         navigate("/"); // Go to landing page after splash
-      }, 2500); // 2.5s duration
+      }, 4500); // 4.5s duration
 
       return () => clearTimeout(timer);
     } else {

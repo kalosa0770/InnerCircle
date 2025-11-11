@@ -20,6 +20,8 @@ import TrackMoodPage from "./user-components/TrackMoodPage.jsx";
 import Profile from "./user-components/Profile.jsx";
 import SplashScreen from "./components/SplashScreen.jsx";
 import EmailVerify from "./components/EmailVerify.jsx";
+import MobileLandingPage from "./components/MobileLandingPage.jsx";
+import Login from "./components/LoginForm.jsx";
 
 function App() {
   const runningAsPWA = isPWA();
@@ -36,7 +38,7 @@ function App() {
         const timer = setTimeout(() => {
           setShowSplash(false);
           localStorage.setItem("hasSeenSplash", "true");
-        }, 2600);
+        }, 4600);
         return () => clearTimeout(timer);
       }
     }
@@ -98,8 +100,8 @@ function App() {
       <Routes>
         {runningAsPWA ? (
           <>
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<PageWrapper><LoginForm /></PageWrapper>} />
+            <Route path="/" element={<PageWrapper><MobileLandingPage /></PageWrapper>} />
+            <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
             <Route path="/verify-email" element={<PageWrapper><EmailVerify /></PageWrapper>} />
@@ -113,7 +115,7 @@ function App() {
         ) : (
           <>
             <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
-            <Route path="/login" element={<PageWrapper><LoginForm /></PageWrapper>} />
+            <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
             <Route path="/verify-email" element={<PageWrapper><EmailVerify /></PageWrapper>} />
