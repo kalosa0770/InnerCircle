@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AppContent } from '../context/AppContent';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LogInIcon } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const Login = () => {
       setError("Please enter both your email and password.");
       return;
     }
+    setLoading(true);
 
     try {
       const res = await axios.post(
@@ -53,21 +56,26 @@ const Login = () => {
     
     } catch (err) {
       toast.error(err.response?.data?.message || "Server error during login.");
+    } finally {
+      setLoading(false);
     }
   };
 
   // Tailwind class shortcuts for gold-teal palette
   const inputBase =
-    "block w-full py-3 px-0 text-lg text-dark-teal bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gold peer";
+  "block w-full py-3 px-0 text-lg text-white bg-transparent appearance-none focus:outline-none focus:ring-0 peer placeholder-transparent border-b border-gray-600 focus:border-gold";
+
   const labelBase =
-    "absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-4 z-10 origin-[0] peer-focus:text-gold peer-focus:-translate-y-6 peer-focus:scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:left-0";
+  "absolute text-base text-white duration-300 transform -translate-y-6 scale-75 top-4 z-10 origin-[0] peer-focus:text-gold peer-focus:-translate-y-6 peer-focus:scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:left-0";
+  
+
 
   return (
-    <div className="flex flex-col min-h-screen w-full items-center justify-center bg-gray-50 font-nunito p-4">
-      <div className="w-full max-w-md bg-white p-8 sm:p-10 rounded-2xl shadow-2xl">
+    <div className="flex flex-col min-h-screen w-full items-center justify-center bg-gradient-to-b from-[#0a1f1f] to-[#062b2b] font-nunito p-4">
+      <div className="w-full max-w-md bg-white/10 p-8 sm:p-10 rounded-2xl shadow-2xl">
         {/* Header */}
-        <h1 className="text-4xl font-extrabold text-teal mb-2 text-center">Welcome Back</h1>
-        <p className="text-base text-gray-500 mb-8 text-center">
+        <h1 className="text-4xl font-extrabold text-gold mb-2 text-center">Welcome Back</h1>
+        <p className="text-base text-white mb-8 text-center">
           Sign in to access your personalized mental wellness tools.
         </p>
 
@@ -110,23 +118,26 @@ const Login = () => {
           <div className="w-full text-right text-sm">
             <Link
               to="/forgot"
-              className="text-gold font-semibold hover:text-dark-gold transition duration-150"
+              className="text-gold font-extrabold hover:text-dark-gold transition duration-150"
             >
               Forgot Password?
             </Link>
           </div>
-
-          {/* Login Button */}
           <button
             type="submit"
-            className="bg-gold text-teal-900 w-full rounded-full py-3 px-4 text-lg font-bold shadow-md hover:bg-dark-gold transition duration-300 mt-4"
+            disabled={loading}
+            className="w-full rounded-full py-3 px-4 text-lg font-extrabold shadow-md bg-gold text-white hover:bg-[#FFD700]/80 transition duration-300 mt-6 flex items-center justify-center gap-2"
           >
-            Login
+            {loading && (
+              <div className="w-5 h-5 border-2 border-[#062b2b] border-t-transparent rounded-full animate-spin"></div>
+            )}
+            {loading ? "" : "Login"}
           </button>
+          
         </form>
 
         {/* Sign Up Link */}
-        <p className="text-center text-sm text-gray-500 mt-6">
+        <p className="text-center text-sm text-white mt-6">
           Don't have an account? 
           <Link to="/register" className="text-gold font-extrabold hover:text-dark-gold ml-1">
             Sign Up
