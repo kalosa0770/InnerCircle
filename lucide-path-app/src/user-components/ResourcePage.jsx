@@ -61,7 +61,7 @@ const ResourcePage = () => {
       <main className="flex flex-col flex-1 gap-8 px-6 md:px-10 py-10 overflow-y-auto no-scrollbar w-full max-w-7xl mx-auto">
         
         {/* Page Header */}
-        <div className="flex  font-dancing-script items-center gap-3">
+        <div className="flex items-center gap-3">
           <div className="bg-gold p-2 rounded-full w-max">
             <BookOpenCheck className="w-5 h-5 text-white" />
           </div>
