@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { isPWA } from "./utils/isPWA";
+import { usePWAInstallPrompt } from "./utils/usePWAInstallPrompt"; // ✅ new hook
+
+// components
 import HomePage from "./components/HomePage.jsx";
 import Register from "./components/Register.jsx";
 import LoginForm from "./components/LoginForm.jsx";
@@ -12,36 +18,54 @@ import TrackMoodPage from "./user-components/TrackMoodPage.jsx";
 import Profile from "./user-components/Profile.jsx";
 import SplashScreen from "./components/SplashScreen.jsx";
 import EmailVerify from "./components/EmailVerify.jsx";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { isPWA } from "./utils/isPWA";
 
 function App() {
   const runningAsPWA = isPWA();
+  const { isInstallable, promptInstall } = usePWAInstallPrompt();
   const location = useLocation();
   const [showSplash, setShowSplash] = useState(false);
 
-  // Show splash only on first visit
+  // Splash logic
   useEffect(() => {
     if (location.pathname === "/") {
       const hasSeenSplash = localStorage.getItem("hasSeenSplash");
-
       if (!hasSeenSplash) {
         setShowSplash(true);
         const timer = setTimeout(() => {
           setShowSplash(false);
           localStorage.setItem("hasSeenSplash", "true");
         }, 2600);
-
         return () => clearTimeout(timer);
       }
     }
   }, [location.pathname]);
 
-  // If splash should show, render it directly
-  if (showSplash) {
-    return <SplashScreen />;
-  }
+  // ✅ Show toast only on web if installable
+  useEffect(() => {
+    if (!runningAsPWA && isInstallable) {
+      toast.info(
+        <div className="flex flex-col items-start gap-2">
+          <span className="font-bold text-gold">Install Lucid Path</span>
+          <span className="text-sm text-gray-200">
+            Add Lucid Path to your home screen for a better experience.
+          </span>
+          <button
+            onClick={async () => {
+              const accepted = await promptInstall();
+              if (accepted) toast.success("Lucid Path installed successfully 🎉");
+            }}
+            className="mt-1 bg-gold text-teal-900 px-3 py-1 rounded-full text-sm font-semibold hover:bg-dark-gold transition-all"
+          >
+            Install Now
+          </button>
+        </div>,
+        { autoClose: false, position: "bottom-center" }
+      );
+    }
+  }, [isInstallable, runningAsPWA, promptInstall]);
+
+  // Splash
+  if (showSplash) return <SplashScreen />;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -58,7 +82,6 @@ function App() {
       />
 
       <Routes>
-        {/* If app is a PWA → redirect root to login */}
         {runningAsPWA ? (
           <>
             <Route path="/" element={<Navigate to="/login" replace />} />
@@ -75,7 +98,6 @@ function App() {
           </>
         ) : (
           <>
-            {/* For normal web — show homepage as default */}
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<Register />} />
