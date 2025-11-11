@@ -4,7 +4,7 @@ import Header from './Header';
 import PopularContent from './PopularContent';
 import MoodEntry from './MoodEntry';
 import TodaysSelection from './TodaysSelection';
-import MoodChart from './MoodChart';
+import WeeklyMoodTracker from './WeeklyMoodTracker';
 import SearchByTopicCards from './SearchByTopicCards';
 import { Outlet } from 'react-router-dom';
 import FooterNav from './FooterNav';
@@ -27,7 +27,7 @@ const UserDashboard = () => {
           <MoodEntry onMoodSelect={setSelectedMood} />
           <PopularContent />
           <TodaysSelection mood={selectedMood?.name} />
-          <MoodChart />
+          <WeeklyMoodTracker />
           <SearchByTopicCards />
           <Outlet />
           <div className="mb-10"></div>

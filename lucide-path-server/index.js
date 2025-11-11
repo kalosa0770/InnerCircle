@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import connectDB from './config/mongodb.js'; 
 import authRouter from './routes/authRoutes.js' 
 import userRouter from './routes/userRoutes.js';
+import moodRoutes from "./routes/moodRoutes.js";
+import journalRoutes from './routes/journalRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 3001
@@ -36,6 +38,8 @@ app.use(cors({
 app.get('/', ( req, res ) => res.send("API working fine"));
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use("/api/moods", moodRoutes);
+app.use('/api/journals', journalRoutes)
 app.listen(port, () => {
     console.log(`Server running on PORT:${port}`);
 });

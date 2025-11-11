@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Lightbulb, Reply } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { AppContent } from "../context/AppContent";
 
 const MoodEntry = ({ onMoodSelect }) => {
   const [selectMood, setSelectMood] = useState(null);
+  const { userData, backendUrl } = useContext(AppContent);
   const navigate = useNavigate();
 
   const moods = [
@@ -24,19 +28,47 @@ const MoodEntry = ({ onMoodSelect }) => {
     { name: "Lonely", emoji: "😔" },
   ];
 
-  const handleSelectMood = (mood) => {
+  const handleSelectMood = async (mood) => {
     setSelectMood(mood);
     onMoodSelect(mood);
+
+    try {
+      if (!userData || !userData._id) {
+        toast.warn("Please log in to save your mood.", {
+          theme: "colored",
+          style: { backgroundColor: "#FFD700", color: "#1a1a1a" },
+        });
+        return;
+      }
+
+      await axios.post(`${backendUrl}/api/moods`, {
+        userId: userData._id,
+        emoji: mood.emoji,
+        name: mood.name,
+      });
+
+      toast.success(`Mood "${mood.name}" logged successfully!`, {
+        theme: "colored",
+        style: { backgroundColor: "#1a3a3a", color: "#FFD700" },
+      });
+    } catch (err) {
+      console.error("Error saving mood:", err);
+      toast.error("Oops! Something went wrong while saving your mood.", {
+        theme: "colored",
+        style: { backgroundColor: "#8B0000", color: "#fff" },
+      });
+    }
   };
 
   const handleMoreClick = () => {
     if (!selectMood) return;
-    navigate(`/mood-questions/${selectMood.name}`, { state: { mood: selectMood } });
+    navigate(`/mood-questions/${selectMood.name}`, {
+      state: { mood: selectMood },
+    });
   };
 
   return (
     <div className="flex flex-col py-6 px-5 md:py-8 md:px-8 rounded-2xl bg-white/10 border border-[#1a3a3a] w-full">
-      {/* Title */}
       <h2 className="text-lg md:text-xl font-extrabold mb-3 text-gold flex items-center gap-2">
         <span className="bg-gold/20 p-2 rounded-full">
           <Lightbulb className="w-5 h-5 text-dark-gold" />
@@ -44,18 +76,16 @@ const MoodEntry = ({ onMoodSelect }) => {
         Track Your Mood
       </h2>
 
-      {/* Prompt */}
       <p className="text-white mb-5 text-start text-base md:text-lg font-extrabold">
         Tap an emoji that best describes today
       </p>
 
-      {/* Mood Grid */}
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 justify-items-center">
         {moods.map((mood) => (
           <button
             key={mood.name}
             onClick={() => handleSelectMood(mood)}
-            className={`text-4xl md:text-5xl rounded-full p-3 transition-all duration-200 shadow-md 
+            className={`flex flex-col text-2xl md:text-3xl rounded-full p-3 transition-all duration-200 shadow-md 
               ${
                 selectMood?.name === mood.name
                   ? "bg-gold text-teal-950 scale-110 shadow-[0_0_15px_rgba(255,215,0,0.5)]"
@@ -64,18 +94,16 @@ const MoodEntry = ({ onMoodSelect }) => {
             title={mood.name}
           >
             {mood.emoji}
+            <p className="text-sm text-white">{mood.name}</p>
           </button>
         ))}
       </div>
 
-      {/* Selection Feedback */}
       {selectMood && (
         <div className="mt-8 text-center">
           <p className="text-lg md:text-xl font-medium text-white">
             You’re feeling{" "}
-            <span className="text-gold font-bold">
-              {selectMood.name}
-            </span>{" "}
+            <span className="text-gold font-bold">{selectMood.name}</span>{" "}
             today {selectMood.emoji}
           </p>
 

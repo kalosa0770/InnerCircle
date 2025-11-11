@@ -46,7 +46,9 @@ function App() {
 
   // PWA install toast
   useEffect(() => {
-    if (!runningAsPWA && isInstallable) {
+    // Only show if not running as PWA, is installable, and toast hasn't been shown yet
+    const hasSeenPWAInstallToast = localStorage.getItem("hasSeenPWAInstallToast");
+    if (!runningAsPWA && isInstallable && !hasSeenPWAInstallToast) {
       toast.info(
         <div className="flex flex-col items-start gap-2">
           <span className="font-bold text-gold">Install Lucid Path</span>
@@ -56,8 +58,7 @@ function App() {
           <button
             onClick={async () => {
               const accepted = await promptInstall();
-              if (accepted)
-                toast.success("Lucid Path installed successfully 🎉");
+              if (accepted) toast.success("Lucid Path installed successfully 🎉");
             }}
             className="mt-1 bg-gold text-teal-900 px-3 py-1 rounded-full text-sm font-semibold hover:bg-dark-gold transition-all"
           >
@@ -66,6 +67,9 @@ function App() {
         </div>,
         { autoClose: false, position: "bottom-center" }
       );
+  
+      // Mark as shown so it won’t show again
+      localStorage.setItem("hasSeenPWAInstallToast", "true");
     }
   }, [isInstallable, runningAsPWA, promptInstall]);
 
