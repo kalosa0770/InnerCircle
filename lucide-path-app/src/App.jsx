@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { isPWA } from "./utils/isPWA";
-import { usePWAInstallPrompt } from "./utils/usePWAInstallPrompt"; // ✅ new hook
 
-// components
+// Utilities
+import { isPWA } from "./utils/isPWA";
+import { usePWAInstallPrompt } from "./utils/usePWAInstallPrompt";
+
+// Components
 import HomePage from "./components/HomePage.jsx";
 import Register from "./components/Register.jsx";
 import LoginForm from "./components/LoginForm.jsx";
@@ -40,7 +42,7 @@ function App() {
     }
   }, [location.pathname]);
 
-  // ✅ Show toast only on web if installable
+  // PWA install toast
   useEffect(() => {
     if (!runningAsPWA && isInstallable) {
       toast.info(
@@ -52,7 +54,8 @@ function App() {
           <button
             onClick={async () => {
               const accepted = await promptInstall();
-              if (accepted) toast.success("Lucid Path installed successfully 🎉");
+              if (accepted)
+                toast.success("Lucid Path installed successfully 🎉");
             }}
             className="mt-1 bg-gold text-teal-900 px-3 py-1 rounded-full text-sm font-semibold hover:bg-dark-gold transition-all"
           >
@@ -64,8 +67,19 @@ function App() {
     }
   }, [isInstallable, runningAsPWA, promptInstall]);
 
-  // Splash
-  if (showSplash) return <SplashScreen />;
+  // Show splash screen if active
+  if (showSplash) {
+    return (
+      <div className="flex items-center justify-center min-h-screen w-full bg-dark-gold">
+        <SplashScreen />
+      </div>
+    );
+  }
+
+  // Page wrapper to ensure full height on mobile
+  const PageWrapper = ({ children }) => (
+    <div className="min-h-screen w-full flex flex-col">{children}</div>
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -73,7 +87,7 @@ function App() {
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
-        newestOnTop={true}
+        newestOnTop
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
@@ -85,30 +99,30 @@ function App() {
         {runningAsPWA ? (
           <>
             <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot" element={<ForgotPassword />} />
-            <Route path="/verify-email" element={<EmailVerify />} />
-            <Route path="/dashboard" element={<UserDashboard />} />
-            <Route path="/mood-entry" element={<MoodEntry />} />
-            <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
-            <Route path="/explore" element={<ResourcePage />} />
-            <Route path="/track" element={<TrackMoodPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<PageWrapper><LoginForm /></PageWrapper>} />
+            <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
+            <Route path="/forgot" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
+            <Route path="/verify-email" element={<PageWrapper><EmailVerify /></PageWrapper>} />
+            <Route path="/dashboard" element={<PageWrapper><UserDashboard /></PageWrapper>} />
+            <Route path="/mood-entry" element={<PageWrapper><MoodEntry /></PageWrapper>} />
+            <Route path="/mood-questions/:mood" element={<PageWrapper><MoodQuestions /></PageWrapper>} />
+            <Route path="/explore" element={<PageWrapper><ResourcePage /></PageWrapper>} />
+            <Route path="/track" element={<PageWrapper><TrackMoodPage /></PageWrapper>} />
+            <Route path="/profile" element={<PageWrapper><Profile /></PageWrapper>} />
           </>
         ) : (
           <>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot" element={<ForgotPassword />} />
-            <Route path="/verify-email" element={<EmailVerify />} />
-            <Route path="/dashboard" element={<UserDashboard />} />
-            <Route path="/mood-entry" element={<MoodEntry />} />
-            <Route path="/mood-questions/:mood" element={<MoodQuestions />} />
-            <Route path="/explore" element={<ResourcePage />} />
-            <Route path="/track" element={<TrackMoodPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
+            <Route path="/login" element={<PageWrapper><LoginForm /></PageWrapper>} />
+            <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
+            <Route path="/forgot" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
+            <Route path="/verify-email" element={<PageWrapper><EmailVerify /></PageWrapper>} />
+            <Route path="/dashboard" element={<PageWrapper><UserDashboard /></PageWrapper>} />
+            <Route path="/mood-entry" element={<PageWrapper><MoodEntry /></PageWrapper>} />
+            <Route path="/mood-questions/:mood" element={<PageWrapper><MoodQuestions /></PageWrapper>} />
+            <Route path="/explore" element={<PageWrapper><ResourcePage /></PageWrapper>} />
+            <Route path="/track" element={<PageWrapper><TrackMoodPage /></PageWrapper>} />
+            <Route path="/profile" element={<PageWrapper><Profile /></PageWrapper>} />
           </>
         )}
       </Routes>
