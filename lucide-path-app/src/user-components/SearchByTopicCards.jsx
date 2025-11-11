@@ -35,8 +35,8 @@ const SearchByTopicCards = ({ onSelectTopic }) => {
             onClick={() => handleClick(topic)}
             className={`px-4 py-3 rounded-xl text-white font-medium text-center transition-all duration-200 hover:scale-105 shadow-lg
               ${activeTopic === topic
-                ? "rounded-2xl bg-teal/60 backdrop-blur-sm"
-                : "rounded-2xl bg-teal/30 backdrop-blur-sm hover:bg-teal/20"}`}
+                ? "rounded-2xl bg-white/30 border border-[#1a3a3a]"
+                : "rounded-2xl bg-white/10 border border-[#1a3a3a]"}`}
           >
             {topic}
           </button>

@@ -59,7 +59,7 @@ const PopularContent = () => {
                             </div>
                             
                             {/* Text Content Area */}
-                            <div className="flex flex-col py-5 md:py-6 px-5 md:px-6 bg-teal/30 backdrop-blur-sm">
+                            <div className="flex flex-col py-5 md:py-6 px-5 md:px-6 bg-white/10 border border-[#1a3a3a]">
                                 <div className="flex items-center mb-3">
                                     <div className={`w-3 h-3 rounded-full ${card.accentColor.replace('text', 'bg')} mr-3`}></div>
                                         <h3 className="text-xl md:text-2xl text-white">

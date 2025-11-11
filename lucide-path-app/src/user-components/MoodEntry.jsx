@@ -35,7 +35,7 @@ const MoodEntry = ({ onMoodSelect }) => {
   };
 
   return (
-    <div className="flex flex-col py-6 px-5 md:py-8 md:px-8 rounded-2xl bg-teal/30 backdrop-blur-sm w-full">
+    <div className="flex flex-col py-6 px-5 md:py-8 md:px-8 rounded-2xl bg-white/10 border border-[#1a3a3a] w-full">
       {/* Title */}
       <h2 className="text-lg md:text-xl font-extrabold mb-3 text-gold flex items-center gap-2">
         <span className="bg-gold/20 p-2 rounded-full">

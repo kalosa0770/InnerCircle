@@ -83,68 +83,67 @@ const Header = ({firstName}) => {
 
   return (
     <header className="flex flex-col w-full font-nunito text-teal">
-  {/* Top Icons */}
-  <div className="flex justify-between items-center mb-6 w-full">
-    {/* Profile Icon */}
-    <button className="flex items-center justify-center bg-white backdrop-blur-md rounded-full p-2 text-white hover:scale-110 transition-all duration-200 shadow-md hover:shadow-[0_0_10px_rgba(255,215,0,0.6)]">
-      <UserCircle className="w-5 h-5 md:w-6 md:h-6 text-teal" />
-    </button>
+      {/* Top Icons */}
+      <div className="flex justify-between items-center mb-6 w-full">
+         {/* App Title (Mobile Only) */}
+        <h1 className="md:hidden font-dancing-script text-4xl font-extrabold text-gold">
+          Lucid Path
+        </h1>
+        {/* Profile Icon */}
+        
+          {/* <button className="flex items-center justify-center bg-white backdrop-blur-md rounded-full p-2 text-white hover:scale-110 transition-all duration-200 shadow-md hover:shadow-[0_0_10px_rgba(255,215,0,0.6)]">
+            <UserCircle className="w-5 h-5 md:w-6 md:h-6 text-teal" />
+          </button> */}
 
-    {/* Notification Icon */}
-    <button className="relative flex items-center justify-center bg-white backdrop-blur-md rounded-full p-2 text-white hover:scale-110 transition-all duration-200 shadow-md hover:shadow-[0_0_10px_rgba(255,215,0,0.6)]">
-      <Bell className="w-5 h-5 md:w-6 md:h-6 text-teal" />
-      <span className="absolute -top-1 -right-1 w-3 h-3 bg-teal rounded-full border-2 border-teal-900"></span>
-    </button>
-  </div>
+          {/* Notification Icon */}
+          <button className="relative flex items-center justify-center bg-white backdrop-blur-md rounded-full p-2 text-white hover:scale-110 transition-all duration-200 shadow-md hover:shadow-[0_0_10px_rgba(255,215,0,0.6)]">
+            <Bell className="w-5 h-5 md:w-6 md:h-6 text-teal" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-teal rounded-full border-2 border-teal-900"></span>
+          </button>
+      </div>
+     
 
-  {/* App Title (Mobile Only) */}
-  <h1 className="md:hidden font-dancing-script text-5xl font-extrabold text-dark-gold text-center mb-6">
-    Lucid Path
-  </h1>
+      {/* Welcome Card */}
+      <div className="flex flex-col py-5 px-4 md:py-6 md:px-6 rounded-2xl text-center w-full">
+        {/* Greeting */}
+        <div className="flex flex-col mb-2 w-full">
+          <h1 className="font-extrabold text-xl md:text-3xl tracking-tight leading-snug text-gold break-words">
+            {greeting},{" "}
+            <span className="text-gold font-extrabold">
+              {firstName}
+            </span>
+          </h1>
+        </div>
 
-  {/* Welcome Card */}
-  <div className="flex flex-col py-5 px-4 md:py-6 md:px-6 rounded-2xl bg-gray/30 p-5 rounded-4xl backdrop-blur-sm   w-full">
-    {/* Greeting */}
-    <div className="flex flex-col mb-4 w-full">
-      <h1 className="font-extrabold text-xl md:text-3xl tracking-tight leading-snug text-gold break-words">
-        {greeting},{" "}
-        <span className="text-gold font-extrabold">
-          {firstName}
-        </span>
-      </h1>
-    </div>
-
-    {/* Daily Affirmation */}
-    <div className="flex flex-col p-4 w-full bg-gradient-to-br from-teal-800/30 to-teal-700/20 rounded-xl">
-      <div className="flex items-center gap-2 mb-2 w-full">
-        <div className="flex items-center gap-2 text-gold">
-          <Zap className="w-4 h-4 md:w-5 md:h-5 fill-dark-teal" />
-          <h2 className="font-semibold text-lg md:text-base italic text-gold">
-            Affirmation of the Day
-          </h2>
+        {/* Daily Affirmation */}
+        <div className="flex flex-col p-3 w-full">
+          <div className="flex text-center itext-center justify-center mx-auto gap-2 mb-2 w-full">
+              <Zap className="w-4 h-4 md:w-5 md:h-5 fill-dark-gold text-gold" />
+              <h2 className="font-semibold text-lg md:text-base italic text-gold">
+                Affirmation of the Day
+              </h2>
+          </div>
+          <p className="text-gold text-sm md:text-base leading-relaxed font-light italic">
+            "{quote}"
+          </p>
         </div>
       </div>
-      <p className="text-gold text-sm md:text-base leading-relaxed font-light italic">
-        {quote}
-      </p>
-    </div>
-  </div>
 
-  {/* Quick Stats Bar */}
-  <div className="flex justify-between items-center mt-4 text-sm text-white w-full">
-    <div className="flex items-center gap-1">
-      <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_6px_rgba(255,215,0,0.8)]"></div>
-      <span>Mindful minutes today: 15</span>
-    </div>
-    <div className="text-white font-medium">
-      {new Date().toLocaleDateString("en-US", {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-      })}
-    </div>
-  </div>
-</header>
+      {/* Quick Stats Bar */}
+      <div className="flex justify-between items-center mt-4 text-sm text-white w-full">
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_6px_rgba(255,215,0,0.8)]"></div>
+          <span>Mindful minutes today: 0</span>
+        </div>
+        <div className="text-white font-medium">
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+          })}
+        </div>
+      </div>
+    </header>
 
   );
 };
