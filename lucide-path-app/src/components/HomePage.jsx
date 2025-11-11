@@ -12,7 +12,6 @@ import therapist from '../assets/therapist.jpg';
 import resources from '../assets/hub.jpg';
 import mood from '../assets/mood-tracking.jpg';
 import community from '../assets/community-forum.jpg';
-
 import heroBackground from '../assets/hero.jpg';
 import icon from '../assets/logo.png';
 
@@ -21,6 +20,28 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  useEffect(() => {
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    });
+  }, []);
+
+  const handleInstall = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') console.log('App installed!');
+      setDeferredPrompt(null);
+    } else {
+      alert('App already installed or not available for install.');
+    }
+  };
+
+
   return (
     <>
       {/* Desktop */}
@@ -28,7 +49,9 @@ const Header = () => {
         <div className="flex justify-between items-center w-full max-w-7xl mx-auto px-4">
           <h1 className='text-3xl font-extrabold text-gold'>Lucid Path</h1>
           <nav className='flex items-center space-x-4'>
-            <button className='bg-gold text-darkteal rounded-full px-6 py-2 font-bold shadow-md hover:bg-darkgold transition'>Download App</button>
+            <button onClick={handleInstall} className='bg-gold text-darkteal rounded-full px-6 py-2 font-bold shadow-md hover:bg-darkgold transition cursor-pointer'>
+              Download App
+            </button>
             <Link to="/login">
               <button className='border-2 border-gold rounded-full px-6 py-2 hover:bg-gold hover:text-darkteal transition font-bold'>Login</button>
             </Link>
@@ -62,7 +85,12 @@ const Header = () => {
                 ))}
               </nav>
               <nav className='flex flex-col w-full space-y-4 text-2xl'>
-                <button className='bg-gold text-darkteal rounded-full px-8 py-3 text-lg font-bold hover:bg-darkgold transition'>Download App</button>
+              <button
+                onClick={handleInstall}
+                className='bg-gold text-darkteal rounded-full px-6 py-2 font-bold shadow-md hover:bg-darkgold transition'
+              >
+                Download App
+              </button>
                 <button className='border-2 border-gold rounded-full px-8 py-3 text-lg hover:bg-gold hover:text-darkteal transition'>Login</button>
                 <p className='text-sm text-center pt-2'>
                   Do not have an account? <Link to="/register"><button className='text-gold font-extrabold hover:underline'>Sign up</button></Link>
@@ -302,22 +330,46 @@ const StepCard = ({step}) => (
   </div>
 );
 
-const GetStartedSteps = () => (
-  <section className="py-16 md:py-24 font-nunito bg-gray">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-12 md:mb-16">
-        <span className="text-sm font-semibold text-gold uppercase tracking-widest">Your Wellness Journey</span>
-        <h2 className="mt-2 text-4xl md:text-5xl font-extrabold text-gold">Three Simple Steps to Get Started</h2>
+const GetStartedSteps = () => {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    });
+  }, []);
+
+  const handleInstall = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') console.log('App installed!');
+      setDeferredPrompt(null);
+    } else {
+      alert('App already installed or not available for install.');
+    }
+  };
+  
+  return (
+    <section className="py-16 md:py-24 font-nunito bg-gray">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-sm font-semibold text-gold uppercase tracking-widest">Your Wellness Journey</span>
+          <h2 className="mt-2 text-4xl md:text-5xl font-extrabold text-gold">Three Simple Steps to Get Started</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-12">
+          {steps.map(step=><StepCard key={step.number} step={step}/>)}
+        </div>
+        <div className="mt-16 text-center">
+          <button onClick={handleInstall} className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full shadow-2xl text-white bg-gold hover:bg-darkgold transition">
+            Download Now <Download className="ml-2"/>
+          </button>
+        </div>
       </div>
-      <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-12">
-        {steps.map(step=><StepCard key={step.number} step={step}/>)}
-      </div>
-      <div className="mt-16 text-center">
-        <button className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full shadow-2xl text-white bg-gold hover:bg-darkgold transition">Download Now <Download className="ml-2"/></button>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  )
+};
 
 // ---------- FOOTER ----------
 const Footer = () => {
