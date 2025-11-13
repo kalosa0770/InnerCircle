@@ -10,8 +10,10 @@ import { usePWAInstallPrompt } from "./utils/usePWAInstallPrompt";
 // Components
 import HomePage from "./components/HomePage.jsx";
 import Register from "./components/Register.jsx";
-import LoginForm from "./components/LoginForm.jsx";
+import Login from "./components/LoginForm.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
+
+// User Dashboard Components
 import UserDashboard from "./user-components/UserDashboard.jsx";
 import MoodQuestions from "./user-components/MoodQuestions.jsx";
 import MoodEntry from "./user-components/MoodEntry.jsx";
@@ -21,7 +23,10 @@ import Profile from "./user-components/Profile.jsx";
 import SplashScreen from "./components/SplashScreen.jsx";
 import EmailVerify from "./components/EmailVerify.jsx";
 import MobileLandingPage from "./components/MobileLandingPage.jsx";
-import Login from "./components/LoginForm.jsx";
+
+// Admin Dashboard Components
+import AdminDashboard from "./admin-components/AdminDashboard.jsx";
+
 
 function App() {
   const runningAsPWA = isPWA();
@@ -123,12 +128,16 @@ function App() {
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
             <Route path="/verify-email" element={<PageWrapper><EmailVerify /></PageWrapper>} />
+            {/* User Dashboard */}
             <Route path="/dashboard" element={<PageWrapper><UserDashboard /></PageWrapper>} />
             <Route path="/mood-entry" element={<PageWrapper><MoodEntry /></PageWrapper>} />
             <Route path="/mood-questions/:mood" element={<PageWrapper><MoodQuestions /></PageWrapper>} />
             <Route path="/explore" element={<PageWrapper><ResourcePage /></PageWrapper>} />
             <Route path="/track" element={<PageWrapper><TrackMoodPage /></PageWrapper>} />
             <Route path="/profile" element={<PageWrapper><Profile /></PageWrapper>} />
+
+            {/* Admin Dashboard */}
+            <Route path="/admin-dashboard" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
           </>
         )}
       </Routes>

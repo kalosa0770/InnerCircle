@@ -38,7 +38,7 @@ const PopularContent = () => {
             {/* Header with better contrast */}
             <div className="mb-1 md:mb-2">
                 <h1 className="text-xl md:text-2xl text-gold font-extrabold mb-3 md:mb-4 drop-shadow-lg">
-                    Popular on Inner Circle
+                    Popular on Lucid Path
                 </h1>
             </div>
 

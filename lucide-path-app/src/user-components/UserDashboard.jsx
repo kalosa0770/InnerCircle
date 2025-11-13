@@ -9,7 +9,7 @@ import SearchByTopicCards from './SearchByTopicCards';
 import { Outlet } from 'react-router-dom';
 import FooterNav from './FooterNav';
 import { AppContent } from "../context/AppContent";
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 const UserDashboard = () => {
   const [selectedMood, setSelectedMood] = useState(null);

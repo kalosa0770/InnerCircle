@@ -1,0 +1,43 @@
+import React from "react";
+import { Home, Calendar, Bell, UserCircle } from 'lucide-react';
+import { Link, NavLink } from 'react-router-dom';
+
+
+const AdminFooter = () => {
+    const navItems = [
+        { name: 'Dashboard', icon: Home, link: 'admin-dashboard'},
+        { name: 'Appointments', icon: Calendar, link: 'appointments'},
+        { name: 'Notifications', icon: Bell, link: 'notifications'},
+        { name: 'Profile', icon: UserCircle, link: 'admin-profile' }
+    ];
+
+    return (
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-teal/30 backdrop-blur-sm text-white rounded-t-2xl shadow-[0_-4px_10px_rgba(0,0,0,0.05)] pt-2 pb-safe md:hidden">
+          <div className="flex justify-around items-center h-16 max-w-xl mx-auto">
+            {navItems.map((item) => {
+    
+              return (
+                <NavLink
+                    key={item.name}
+                    to={`/${item.link.toLowerCase()}`}
+                    className={({ isActive }) =>
+                      `flex flex-col items-center p-2 rounded-lg transition duration-300 hover:bg-gray-100 active:bg-gray-200 ${
+                        isActive
+                          ? "text-gold font-extrabold"
+                          : "text-white"
+                      }`
+                    }
+                  >
+                    <item.icon size={24}  />
+                    <span className={`text-xs mt-1 `}>{item.name}</span>
+                </NavLink>
+                
+              );
+            })}
+          </div>
+        </div>
+      );
+
+}
+
+export default AdminFooter;
